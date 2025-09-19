@@ -18,140 +18,157 @@ import {
   Mail,
   Phone,
   MapPin,
-  GraduationCap
+  GraduationCap,
+  Sparkles,
+  Zap,
+  Target,
+  TrendingUp
 } from 'lucide-react';
 import Header from '@/components/Header';
-import heroDashboard from '@/assets/hero-dashboard-1.jpg';
-import teamImage from '@/assets/about-team-1.jpg';
-import counselImage from '@/assets/about-counsel-1.jpg';
-import studentImage from '@/assets/about-student-1.jpg';
-import gallery1 from '@/assets/gallery-1.jpg';
-import gallery2 from '@/assets/gallery-2.jpg';
-import gallery3 from '@/assets/gallery-3.jpg';
-import gallery4 from '@/assets/gallery-4.jpg';
+import GeometricShapes from '@/components/GeometricShapes';
+import heroDashboard from '@/assets/hero-dashboard-dark.jpg';
+import teamImage from '@/assets/team-modern-dark.jpg';
+import counselImage from '@/assets/counseling-dark.jpg';
+import studentImage from '@/assets/students-modern-dark.jpg';
+import classroomImage from '@/assets/classroom-dark.jpg';
+import techImage from '@/assets/tech-workspace-dark.jpg';
 
 const Home = () => {
   const portalCards = [
     {
       title: 'Student Portal',
-      description: 'Access your attendance records, submit requests, and track your academic progress.',
+      description: 'Track your academic journey with intelligent insights and personalized support.',
       icon: Users,
       gradient: 'student',
       role: 'student',
-      features: ['View Attendance', 'Submit Requests', 'Track Progress'],
+      features: ['Real-time Analytics', 'Smart Notifications', 'Progress Tracking'],
+      stats: '15K+ Active Students',
     },
     {
       title: 'Counselor Portal',
-      description: 'Monitor student attendance, identify patterns, and provide timely support.',
+      description: 'Empower early intervention with AI-driven student risk detection and support tools.',
       icon: UserCheck,
       gradient: 'counselor',
       role: 'counselor',
-      features: ['Student Monitoring', 'Pattern Analysis', 'Support Tools'],
+      features: ['Risk Detection', 'Intervention Tools', 'Student Insights'],
+      stats: '2K+ Counselors',
     },
     {
       title: 'Admin Portal',
-      description: 'Comprehensive dashboard for managing users, settings, and system overview.',
+      description: 'Comprehensive oversight with advanced analytics and system-wide management.',
       icon: Shield,
       gradient: 'admin',
       role: 'admin',
-      features: ['User Management', 'System Settings', 'Analytics'],
+      features: ['System Analytics', 'User Management', 'Custom Reports'],
+      stats: '500+ Institutions',
     },
   ];
 
   const howItWorksSteps = [
     {
       icon: Upload,
-      title: 'Upload Data',
-      description: 'Seamlessly import attendance records from your existing systems or manual entry.',
+      title: 'Smart Data Integration',
+      description: 'Seamlessly connect with existing systems and import attendance data with intelligent mapping and validation.',
     },
     {
       icon: UserCog,
-      title: 'Assign & Monitor',
-      description: 'Automatically assign counselors and set up monitoring rules for early intervention.',
+      title: 'AI-Powered Analysis',
+      description: 'Advanced algorithms analyze patterns, predict risks, and automatically assign support resources.',
     },
     {
       icon: MessageSquare,
-      title: 'Counsel & Support',
-      description: 'Enable targeted counseling sessions and track student improvement over time.',
+      title: 'Proactive Intervention',
+      description: 'Enable targeted support with real-time alerts, automated workflows, and outcome tracking.',
     },
   ];
 
   const galleryImages = [
-    { src: gallery1, alt: 'Students collaborating in modern classroom' },
-    { src: gallery2, alt: 'Teacher mentoring student one-on-one' },
-    { src: gallery3, alt: 'Students studying in library setting' },
-    { src: gallery4, alt: 'Modern classroom with engaged students' },
+    { src: classroomImage, alt: 'Modern classroom with sophisticated technology', title: 'Smart Classrooms' },
+    { src: techImage, alt: 'Advanced educational technology workspace', title: 'Tech Integration' },
+    { src: studentImage, alt: 'Students engaged in modern learning environment', title: 'Student Success' },
+    { src: counselImage, alt: 'Professional counseling in modern setting', title: 'Support Systems' },
+    { src: teamImage, alt: 'Professional team collaboration', title: 'Expert Team' },
+    { src: heroDashboard, alt: 'Advanced dashboard interface', title: 'Analytics Platform' },
   ];
 
   const features = [
-    'Real-time attendance tracking',
-    'AI-powered risk detection',
-    'Automated counselor assignment',
-    'Comprehensive reporting dashboard',
-    'Mobile-friendly interface',
-    'Secure data encryption',
+    { icon: Zap, text: 'Real-time attendance tracking' },
+    { icon: Target, text: 'AI-powered risk detection' },
+    { icon: Users, text: 'Automated counselor assignment' },
+    { icon: BarChart3, text: 'Advanced analytics dashboard' },
+    { icon: Sparkles, text: 'Predictive intervention alerts' },
+    { icon: TrendingUp, text: 'Outcome measurement tools' },
+  ];
+
+  const stats = [
+    { number: '500+', label: 'Educational Institutions', color: 'text-student' },
+    { number: '50K+', label: 'Students Supported', color: 'text-counselor' },
+    { number: '95%', label: 'Success Rate', color: 'text-admin' },
+    { number: '24/7', label: 'Platform Availability', color: 'text-primary' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
-      
-      {/* Floating Background Blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="blob absolute top-20 left-10 w-72 h-72 opacity-30" />
-        <div className="blob absolute top-40 right-20 w-96 h-96 opacity-20" />
-        <div className="blob absolute bottom-20 left-1/3 w-80 h-80 opacity-25" />
-      </div>
+      <GeometricShapes />
 
-      <main className="relative">
+      <main className="relative z-10">
         {/* Hero Section */}
-        <section className="pt-32 pb-20 px-6">
+        <section className="pt-32 pb-20 px-6 relative overflow-hidden">
           <div className="container mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              className="grid lg:grid-cols-2 gap-16 items-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
               {/* Left Column - Content */}
-              <div className="space-y-8">
+              <div className="space-y-8 relative z-10">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
-                    ✨ Trusted by 500+ Educational Institutions
+                  <Badge className="mb-6 glass border-primary/30 text-primary bg-primary/10 backdrop-blur-lg">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Trusted by 500+ Educational Institutions
                   </Badge>
-                  <h1 className="font-display text-5xl lg:text-7xl leading-tight text-foreground">
+                  <h1 className="font-display text-5xl lg:text-7xl xl:text-8xl leading-tight text-foreground text-shadow">
                     Transform{' '}
-                    <span className="gradient-text">Student Attendance</span>{' '}
-                    Into Academic Success
+                    <span className="gradient-text neon-glow">Student Success</span>{' '}
+                    Through Intelligent Insights
                   </h1>
                 </motion.div>
 
                 <motion.p
-                  className="text-xl text-muted-foreground leading-relaxed max-w-lg"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl"
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  Empower counselors and administrators with intelligent attendance tracking, 
-                  early intervention alerts, and comprehensive student support tools.
+                  Empower educators with AI-driven attendance analytics, predictive intervention tools, 
+                  and comprehensive student support platforms that make a real difference.
                 </motion.p>
 
                 <motion.div
-                  className="flex flex-col sm:flex-row gap-4"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="flex flex-col sm:flex-row gap-6"
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
                 >
                   <Button
                     size="lg"
-                    className="bg-gradient-student hover:bg-student-hover text-white shadow-lifted hover:shadow-glow hover:scale-105 transition-all duration-300 group"
+                    className="bg-gradient-student hover:shadow-glow-intense text-white px-8 py-4 text-lg hover-glow group relative overflow-hidden"
                   >
-                    Get Started Free
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <span className="relative z-10 flex items-center">
+                      Get Started Free
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </Button>
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-2 hover:bg-primary/5 hover:border-primary hover:scale-105 transition-all duration-300 group"
+                    className="glass border-primary/30 hover:border-primary/50 text-foreground px-8 py-4 text-lg hover-glow group"
                   >
                     <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                     Watch Demo
@@ -159,15 +176,15 @@ const Home = () => {
                 </motion.div>
 
                 <motion.div
-                  className="flex flex-wrap gap-4 pt-6"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8"
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
                 >
                   {features.slice(0, 3).map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle className="h-4 w-4 text-student" />
-                      {feature}
+                    <div key={index} className="flex items-center gap-3 glass p-3 rounded-lg">
+                      <feature.icon className="h-5 w-5 text-primary" />
+                      <span className="text-sm text-foreground font-medium">{feature.text}</span>
                     </div>
                   ))}
                 </motion.div>
@@ -175,41 +192,104 @@ const Home = () => {
 
               {/* Right Column - Hero Visual */}
               <motion.div
-                className="relative"
-                initial={{ opacity: 0, x: 100, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+                className="relative lg:ml-12"
+                initial={{ opacity: 0, x: 50, rotateY: -15 }}
+                animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                transition={{ duration: 1.2, delay: 0.4 }}
               >
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-student rounded-3xl opacity-20 blur-2xl group-hover:opacity-30 transition-opacity duration-500" />
-                  <img
+                <div className="relative group perspective-1000">
+                  <div className="absolute inset-0 bg-gradient-student rounded-3xl opacity-20 blur-3xl group-hover:opacity-40 transition-all duration-700" />
+                  <motion.img
                     src={heroDashboard}
-                    alt="Attendance Portal Dashboard"
-                    className="relative w-full h-auto rounded-3xl shadow-floating hover:shadow-glow transition-all duration-500 hover:scale-105"
+                    alt="Advanced Attendance Portal Dashboard"
+                    className="relative w-full h-auto rounded-3xl shadow-floating hover:shadow-glow-intense transition-all duration-700 hover-glow border border-primary/20"
                     loading="eager"
+                    whileHover={{ 
+                      scale: 1.02,
+                      rotateX: 5,
+                      rotateY: 5,
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+                  
+                  {/* Floating stats cards */}
+                  <motion.div
+                    className="absolute -top-6 -left-6 glass p-4 rounded-xl border border-primary/20"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <TrendingUp className="h-5 w-5 text-counselor" />
+                      <div>
+                        <div className="text-sm font-semibold text-foreground">95% Success</div>
+                        <div className="text-xs text-muted-foreground">Intervention Rate</div>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    className="absolute -bottom-6 -right-8 glass p-4 rounded-xl border border-primary/20"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Users className="h-5 w-5 text-admin" />
+                      <div>
+                        <div className="text-sm font-semibold text-foreground">50K+ Students</div>
+                        <div className="text-xs text-muted-foreground">Actively Supported</div>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Stats Row */}
+            <motion.div
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-border/20"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center group">
+                  <motion.div 
+                    className={`text-4xl lg:text-5xl font-display ${stat.color} mb-2`}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {stat.number}
+                  </motion.div>
+                  <div className="text-muted-foreground font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
         {/* Portal Selection Cards */}
-        <section className="py-20 px-6">
+        <section className="py-24 px-6 relative">
           <div className="container mx-auto">
             <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 20 }}
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-display text-4xl lg:text-5xl text-foreground mb-4">
-                Choose Your Portal
+              <Badge className="mb-6 glass border-counselor/30 text-counselor bg-counselor/10">
+                <Target className="w-4 h-4 mr-2" />
+                Choose Your Experience
+              </Badge>
+              <h2 className="font-display text-4xl lg:text-6xl text-foreground mb-6 text-shadow">
+                Tailored Portals for Every Role
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Access the tools and insights tailored to your role in the educational ecosystem
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Access specialized dashboards and tools designed specifically for your role in the educational ecosystem
               </p>
             </motion.div>
 
@@ -217,40 +297,45 @@ const Home = () => {
               {portalCards.map((card, index) => (
                 <motion.div
                   key={card.role}
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -8, scale: 1.03 }}
-                  className="group"
+                  className="group floating-card"
                 >
-                  <Card className={`portal-card ${card.gradient} border-0 shadow-lifted hover:shadow-glow transition-all duration-500 h-full`}>
-                    <CardContent className="p-8 text-center space-y-6">
-                      <div className="mx-auto w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <card.icon className="h-8 w-8 text-white" />
+                  <Card className={`portal-card ${card.gradient} border-0 shadow-floating h-full relative overflow-hidden`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                    <CardContent className="p-8 relative z-10 space-y-6">
+                      <div className="flex items-center justify-between">
+                        <div className="w-16 h-16 rounded-2xl glass border border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <card.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <Badge className="bg-white/20 text-white border-0 text-xs">
+                          {card.stats}
+                        </Badge>
                       </div>
                       
                       <div>
                         <h3 className="font-display text-2xl text-white mb-3">
                           {card.title}
                         </h3>
-                        <p className="text-white/90 leading-relaxed">
+                        <p className="text-white/90 leading-relaxed text-lg">
                           {card.description}
                         </p>
                       </div>
 
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {card.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-center gap-2 text-white/80 text-sm">
-                            <CheckCircle className="h-4 w-4" />
-                            {feature}
+                          <div key={featureIndex} className="flex items-center gap-3 text-white/80">
+                            <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                            <span>{feature}</span>
                           </div>
                         ))}
                       </div>
 
-                      <Link to={`/auth/login?role=${card.role}`}>
+                      <Link to={`/auth/login?role=${card.role}`} className="block">
                         <Button 
-                          className="w-full bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm hover:scale-105 transition-all duration-300 group"
+                          className="w-full glass border border-white/20 hover:bg-white/20 text-white hover:scale-105 transition-all duration-300 group mt-6"
                         >
                           Access Portal
                           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -265,45 +350,51 @@ const Home = () => {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 px-6 bg-card/50">
-          <div className="container mx-auto">
+        <section className="py-24 px-6 relative">
+          <div className="absolute inset-0 glass opacity-30" />
+          <div className="container mx-auto relative z-10">
             <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 20 }}
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-display text-4xl lg:text-5xl text-foreground mb-4">
+              <Badge className="mb-6 glass border-admin/30 text-admin bg-admin/10">
+                <Zap className="w-4 h-4 mr-2" />
                 How It Works
+              </Badge>
+              <h2 className="font-display text-4xl lg:text-6xl text-foreground mb-6 text-shadow">
+                Three Steps to Transformation
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Three simple steps to transform your attendance management
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Our intelligent platform streamlines the entire process from data integration to actionable insights
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-12 relative">
               {howItWorksSteps.map((step, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  className="text-center group"
+                  className="text-center group relative"
                 >
-                  <div className="relative mb-6">
-                    <div className="mx-auto w-20 h-20 rounded-2xl bg-gradient-student flex items-center justify-center shadow-lifted group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
-                      <step.icon className="h-10 w-10 text-white" />
+                  <div className="relative mb-8">
+                    <div className="mx-auto w-24 h-24 rounded-3xl bg-gradient-student flex items-center justify-center shadow-floating group-hover:shadow-glow-intense hover-glow">
+                      <step.icon className="h-12 w-12 text-white" />
                     </div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border border-primary/20 animate-pulse" />
                     {index < howItWorksSteps.length - 1 && (
-                      <div className="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-primary to-transparent" />
+                      <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-primary via-counselor to-transparent" />
                     )}
                   </div>
-                  <h3 className="font-display text-2xl text-foreground mb-3">
+                  <h3 className="font-display text-2xl lg:text-3xl text-foreground mb-4">
                     {step.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed text-lg">
                     {step.description}
                   </p>
                 </motion.div>
@@ -312,52 +403,51 @@ const Home = () => {
           </div>
         </section>
 
-        {/* About Preview & Gallery */}
-        <section className="py-20 px-6">
+        {/* Gallery & Impact */}
+        <section className="py-24 px-6">
           <div className="container mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
               <motion.div
-                initial={{ opacity: 0, x: -40 }}
+                initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 1 }}
                 viewport={{ once: true }}
                 className="space-y-8"
               >
                 <div>
-                  <Badge className="mb-4 bg-counselor/10 text-counselor border-counselor/20">
-                    About Our Platform
+                  <Badge className="mb-6 glass border-primary/30 text-primary bg-primary/10">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Our Impact
                   </Badge>
-                  <h2 className="font-display text-4xl lg:text-5xl text-foreground mb-6">
-                    Empowering Educational Excellence Through{' '}
-                    <span className="gradient-text">Smart Insights</span>
+                  <h2 className="font-display text-4xl lg:text-6xl text-foreground mb-6 text-shadow">
+                    Transforming Education Through{' '}
+                    <span className="gradient-text">Advanced Technology</span>
                   </h2>
                   <p className="text-xl text-muted-foreground leading-relaxed">
-                    Our platform combines cutting-edge technology with educational expertise 
-                    to help institutions identify at-risk students early and provide targeted support.
+                    Our platform combines cutting-edge AI with educational expertise to create 
+                    meaningful change in institutions worldwide.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-display text-student mb-2">500+</div>
-                    <div className="text-muted-foreground">Institutions</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-display text-counselor mb-2">50K+</div>
-                    <div className="text-muted-foreground">Students Helped</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-display text-admin mb-2">95%</div>
-                    <div className="text-muted-foreground">Success Rate</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-display text-primary mb-2">24/7</div>
-                    <div className="text-muted-foreground">Support</div>
-                  </div>
+                <div className="grid grid-cols-2 gap-8">
+                  {stats.map((stat, index) => (
+                    <motion.div
+                      key={index}
+                      className="glass p-6 rounded-2xl border border-primary/10 hover-glow"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    >
+                      <div className={`text-3xl font-display ${stat.color} mb-2`}>{stat.number}</div>
+                      <div className="text-muted-foreground text-sm">{stat.label}</div>
+                    </motion.div>
+                  ))}
                 </div>
 
                 <Link to="/about">
-                  <Button variant="outline" className="hover:bg-primary/5 hover:border-primary group">
+                  <Button 
+                    variant="outline" 
+                    className="glass border-primary/30 hover:border-primary/50 text-foreground hover-glow group"
+                  >
                     Learn More About Us
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -365,26 +455,29 @@ const Home = () => {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 40 }}
+                initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 1 }}
                 viewport={{ once: true }}
-                className="grid grid-cols-2 gap-4"
+                className="grid grid-cols-2 gap-6"
               >
                 {galleryImages.map((image, index) => (
                   <motion.div
                     key={index}
-                    whileHover={{ scale: 1.05, y: -4 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative group"
+                    whileHover={{ scale: 1.05, rotateY: 5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="relative group overflow-hidden rounded-2xl aspect-square"
                   >
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-48 object-cover rounded-2xl shadow-soft group-hover:shadow-lifted transition-all duration-300"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-semibold text-sm">{image.title}</h4>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -393,44 +486,45 @@ const Home = () => {
         </section>
 
         {/* Contact & Feedback CTA */}
-        <section className="py-20 px-6 bg-card/30">
-          <div className="container mx-auto">
+        <section className="py-24 px-6 relative">
+          <div className="absolute inset-0 glass opacity-20" />
+          <div className="container mx-auto relative z-10">
             <div className="grid md:grid-cols-2 gap-12">
               {/* Contact Preview */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <Card className="p-8 hover:shadow-lifted transition-all duration-300 hover:scale-105">
+                <Card className="glass p-8 hover-glow h-full border border-primary/20">
                   <CardContent className="space-y-6">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-xl bg-gradient-student">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 rounded-2xl bg-gradient-student">
                         <Mail className="h-6 w-6 text-white" />
                       </div>
                       <h3 className="font-display text-2xl text-foreground">Get In Touch</h3>
                     </div>
-                    <p className="text-muted-foreground">
-                      Have questions about our platform? Our team is here to help you get started.
+                    <p className="text-muted-foreground text-lg">
+                      Ready to transform your institution? Our team is here to help you get started with a personalized demo.
                     </p>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                        <Phone className="h-4 w-4 text-primary" />
-                        +1 (555) 123-4567
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3 text-muted-foreground">
+                        <Phone className="h-5 w-5 text-primary" />
+                        <span>+1 (555) 123-4567</span>
                       </div>
-                      <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                        <Mail className="h-4 w-4 text-primary" />
-                        hello@attendanceportal.com
+                      <div className="flex items-center gap-3 text-muted-foreground">
+                        <Mail className="h-5 w-5 text-primary" />
+                        <span>hello@attendanceportal.com</span>
                       </div>
-                      <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                        <MapPin className="h-4 w-4 text-primary" />
-                        San Francisco, CA
+                      <div className="flex items-center gap-3 text-muted-foreground">
+                        <MapPin className="h-5 w-5 text-primary" />
+                        <span>San Francisco, CA</span>
                       </div>
                     </div>
                     <Link to="/contact">
-                      <Button className="w-full bg-gradient-student hover:bg-student-hover text-white">
-                        Contact Us
+                      <Button className="w-full bg-gradient-student hover:shadow-glow text-white hover-glow">
+                        Schedule Demo
                       </Button>
                     </Link>
                   </CardContent>
@@ -439,35 +533,35 @@ const Home = () => {
 
               {/* Feedback Preview */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="p-8 hover:shadow-lifted transition-all duration-300 hover:scale-105">
+                <Card className="glass p-8 hover-glow h-full border border-counselor/20">
                   <CardContent className="space-y-6">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-xl bg-gradient-counselor">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 rounded-2xl bg-gradient-counselor">
                         <Star className="h-6 w-6 text-white" />
                       </div>
                       <h3 className="font-display text-2xl text-foreground">Share Feedback</h3>
                     </div>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground text-lg">
                       Help us improve by sharing your experience and suggestions for our platform.
                     </p>
                     <div className="flex items-center gap-2">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className="h-5 w-5 text-yellow-400 fill-current"
+                          className="h-6 w-6 text-yellow-400 fill-current"
                         />
                       ))}
-                      <span className="text-sm text-muted-foreground ml-2">
-                        4.9/5 average rating
+                      <span className="text-muted-foreground ml-3">
+                        4.9/5 from 500+ reviews
                       </span>
                     </div>
                     <Link to="/feedback">
-                      <Button className="w-full bg-gradient-counselor hover:bg-counselor-hover text-white">
+                      <Button className="w-full bg-gradient-counselor hover:shadow-glow text-white hover-glow">
                         Leave Feedback
                       </Button>
                     </Link>
@@ -479,11 +573,12 @@ const Home = () => {
         </section>
 
         {/* Footer */}
-        <footer className="py-16 px-6 bg-gradient-to-b from-background to-muted/30">
-          <div className="container mx-auto">
-            <div className="grid md:grid-cols-4 gap-8">
+        <footer className="py-20 px-6 relative border-t border-border/20">
+          <div className="absolute inset-0 glass opacity-10" />
+          <div className="container mx-auto relative z-10">
+            <div className="grid md:grid-cols-4 gap-12">
               {/* Brand */}
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-xl bg-gradient-student">
                     <GraduationCap className="h-6 w-6 text-white" />
@@ -492,20 +587,32 @@ const Home = () => {
                     AttendancePortal
                   </span>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Transforming student attendance into academic success through intelligent monitoring and support.
+                <p className="text-muted-foreground leading-relaxed">
+                  Transforming student success through intelligent attendance analytics and proactive support systems.
                 </p>
+                <div className="flex gap-4">
+                  {/* Social links placeholder */}
+                  <div className="w-10 h-10 glass rounded-lg flex items-center justify-center hover-glow cursor-pointer">
+                    <div className="w-4 h-4 bg-primary rounded" />
+                  </div>
+                  <div className="w-10 h-10 glass rounded-lg flex items-center justify-center hover-glow cursor-pointer">
+                    <div className="w-4 h-4 bg-counselor rounded" />
+                  </div>
+                  <div className="w-10 h-10 glass rounded-lg flex items-center justify-center hover-glow cursor-pointer">
+                    <div className="w-4 h-4 bg-admin rounded" />
+                  </div>
+                </div>
               </div>
 
               {/* Quick Links */}
               <div>
-                <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
-                <ul className="space-y-2">
+                <h4 className="font-display text-lg text-foreground mb-6">Quick Links</h4>
+                <ul className="space-y-4">
                   {['Home', 'About', 'Contact', 'Feedback'].map((link) => (
                     <li key={link}>
                       <Link
                         to={`/${link.toLowerCase() === 'home' ? '' : link.toLowerCase()}`}
-                        className="text-muted-foreground hover:text-primary transition-colors duration-200 text-sm"
+                        className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:translate-x-1 inline-block"
                       >
                         {link}
                       </Link>
@@ -516,13 +623,13 @@ const Home = () => {
 
               {/* Portals */}
               <div>
-                <h4 className="font-semibold text-foreground mb-4">Portals</h4>
-                <ul className="space-y-2">
+                <h4 className="font-display text-lg text-foreground mb-6">Portals</h4>
+                <ul className="space-y-4">
                   {['Student Portal', 'Counselor Portal', 'Admin Portal'].map((portal) => (
                     <li key={portal}>
                       <Link
                         to="/auth/login"
-                        className="text-muted-foreground hover:text-primary transition-colors duration-200 text-sm"
+                        className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:translate-x-1 inline-block"
                       >
                         {portal}
                       </Link>
@@ -533,13 +640,13 @@ const Home = () => {
 
               {/* Resources */}
               <div>
-                <h4 className="font-semibold text-foreground mb-4">Support</h4>
-                <ul className="space-y-2">
+                <h4 className="font-display text-lg text-foreground mb-6">Support</h4>
+                <ul className="space-y-4">
                   {['Help Center', 'Documentation', 'Privacy Policy', 'Terms of Service'].map((item) => (
                     <li key={item}>
                       <a
                         href="#"
-                        className="text-muted-foreground hover:text-primary transition-colors duration-200 text-sm"
+                        className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:translate-x-1 inline-block"
                       >
                         {item}
                       </a>
@@ -549,8 +656,8 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="border-t border-border mt-12 pt-8 text-center">
-              <p className="text-muted-foreground text-sm">
+            <div className="border-t border-border/20 mt-16 pt-8 text-center">
+              <p className="text-muted-foreground">
                 © 2024 AttendancePortal. All rights reserved. Built with ❤️ for education.
               </p>
             </div>

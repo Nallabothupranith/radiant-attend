@@ -62,18 +62,29 @@ export default {
           foreground: "hsl(var(--admin-foreground))",
           hover: "hsl(var(--admin-hover))",
         },
+        // EasyA specific colors
+        'easya-deep': '#000102',
+        'easya-navy': '#201559',
+        'easya-purple': '#56538B',
+        'easya-gray': '#524E62',
+        'easya-light': '#A0A8B7',
+        'easya-white': '#FAFBFD',
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
         'gradient-student': 'var(--gradient-student)',
         'gradient-counselor': 'var(--gradient-counselor)',
         'gradient-admin': 'var(--gradient-admin)',
+        'gradient-glass': 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
       },
       boxShadow: {
         'glow': 'var(--shadow-glow)',
+        'glow-intense': 'var(--shadow-glow-intense)',
+        'glass': 'var(--glass-shadow)',
         'soft': 'var(--shadow-md)',
         'lifted': 'var(--shadow-lg)',
         'floating': 'var(--shadow-xl)',
+        'neon': '0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor',
       },
       fontFamily: {
         'display': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
@@ -85,6 +96,14 @@ export default {
         '72': '18rem',
         '84': '21rem',
         '96': '24rem',
+      },
+      backdropBlur: {
+        'xs': '2px',
+        'glass': '20px',
+      },
+      perspective: {
+        '1000': '1000px',
+        '1500': '1500px',
       },
       borderRadius: {
         lg: "var(--radius)",
