@@ -47,16 +47,44 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        student: {
+          DEFAULT: "hsl(var(--student))",
+          foreground: "hsl(var(--student-foreground))",
+          hover: "hsl(var(--student-hover))",
         },
+        counselor: {
+          DEFAULT: "hsl(var(--counselor))",
+          foreground: "hsl(var(--counselor-foreground))",
+          hover: "hsl(var(--counselor-hover))",
+        },
+        admin: {
+          DEFAULT: "hsl(var(--admin))",
+          foreground: "hsl(var(--admin-foreground))",
+          hover: "hsl(var(--admin-hover))",
+        },
+      },
+      backgroundImage: {
+        'gradient-hero': 'var(--gradient-hero)',
+        'gradient-student': 'var(--gradient-student)',
+        'gradient-counselor': 'var(--gradient-counselor)',
+        'gradient-admin': 'var(--gradient-admin)',
+      },
+      boxShadow: {
+        'glow': 'var(--shadow-glow)',
+        'soft': 'var(--shadow-md)',
+        'lifted': 'var(--shadow-lg)',
+        'floating': 'var(--shadow-xl)',
+      },
+      fontFamily: {
+        'display': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        'body': ['Inter', 'system-ui', 'sans-serif'],
+        'inter': ['Inter', 'system-ui', 'sans-serif'],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '72': '18rem',
+        '84': '21rem',
+        '96': '24rem',
       },
       borderRadius: {
         lg: "var(--radius)",
