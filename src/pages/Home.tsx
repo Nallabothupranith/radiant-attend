@@ -26,6 +26,9 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import GeometricShapes from '@/components/GeometricShapes';
+import ScrollReveal from '@/components/ScrollReveal';
+import AnimatedCounter from '@/components/AnimatedCounter';
+import ParallaxImage from '@/components/ParallaxImage';
 import heroDashboard from '@/assets/hero-dashboard-dark.jpg';
 import teamImage from '@/assets/team-modern-dark.jpg';
 import counselImage from '@/assets/counseling-dark.jpg';
@@ -135,7 +138,7 @@ const Home = () => {
                   </Badge>
                   <h1 className="font-display text-5xl lg:text-7xl xl:text-8xl leading-tight text-foreground text-shadow">
                     Transform{' '}
-                    <span className="gradient-text neon-glow">Student Success</span>{' '}
+                    <span className="shimmer-text neon-glow">Student Success</span>{' '}
                     Through Intelligent Insights
                   </h1>
                 </motion.div>
@@ -158,7 +161,7 @@ const Home = () => {
                 >
                   <Button
                     size="lg"
-                    className="bg-gradient-student hover:shadow-glow-intense text-white px-8 py-4 text-lg hover-glow group relative overflow-hidden"
+                    className="bg-gradient-student hover:shadow-glow-intense text-white px-8 py-4 text-lg hover-glow group relative overflow-hidden ripple-effect press-down"
                   >
                     <span className="relative z-10 flex items-center">
                       Get Started Free
@@ -168,7 +171,7 @@ const Home = () => {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="glass border-primary/30 hover:border-primary/50 text-foreground px-8 py-4 text-lg hover-glow group"
+                    className="glass border-primary/30 hover:border-primary/50 text-foreground px-8 py-4 text-lg hover-glow group ripple-effect press-down"
                   >
                     <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                     Watch Demo
@@ -199,17 +202,11 @@ const Home = () => {
               >
                 <div className="relative group perspective-1000">
                   <div className="absolute inset-0 bg-gradient-student rounded-3xl opacity-20 blur-3xl group-hover:opacity-40 transition-all duration-700" />
-                  <motion.img
+                  <ParallaxImage
                     src={heroDashboard}
                     alt="Advanced Attendance Portal Dashboard"
                     className="relative w-full h-auto rounded-3xl shadow-floating hover:shadow-glow-intense transition-all duration-700 hover-glow border border-primary/20"
-                    loading="eager"
-                    whileHover={{ 
-                      scale: 1.02,
-                      rotateX: 5,
-                      rotateY: 5,
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    parallaxStrength={0.15}
                   />
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-background/40 via-transparent to-transparent" />
                   
@@ -222,7 +219,9 @@ const Home = () => {
                     <div className="flex items-center gap-2">
                       <TrendingUp className="h-5 w-5 text-counselor" />
                       <div>
-                        <div className="text-sm font-semibold text-foreground">95% Success</div>
+                        <div className="text-sm font-semibold text-foreground">
+                          <AnimatedCounter end={95} suffix="%" />
+                        </div>
                         <div className="text-xs text-muted-foreground">Intervention Rate</div>
                       </div>
                     </div>
@@ -236,7 +235,9 @@ const Home = () => {
                     <div className="flex items-center gap-2">
                       <Users className="h-5 w-5 text-admin" />
                       <div>
-                        <div className="text-sm font-semibold text-foreground">50K+ Students</div>
+                        <div className="text-sm font-semibold text-foreground">
+                          <AnimatedCounter end={50000} suffix="+" />
+                        </div>
                         <div className="text-xs text-muted-foreground">Actively Supported</div>
                       </div>
                     </div>
@@ -252,18 +253,28 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <motion.div 
-                    className={`text-4xl lg:text-5xl font-display ${stat.color} mb-2`}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {stat.number}
-                  </motion.div>
-                  <div className="text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              ))}
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center group">
+                <motion.div 
+                  className={`text-4xl lg:text-5xl font-display ${stat.color} mb-2`}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  {stat.number.includes('+') ? (
+                    <>
+                      <AnimatedCounter end={parseInt(stat.number.replace(/[^0-9]/g, ''))} />
+                      <span>+</span>
+                    </>
+                  ) : (
+                    <AnimatedCounter 
+                      end={stat.number.includes('%') ? parseInt(stat.number) : parseInt(stat.number)} 
+                      suffix={stat.number.includes('%') ? '%' : ''}
+                    />
+                  )}
+                </motion.div>
+                <div className="text-muted-foreground font-medium">{stat.label}</div>
+              </div>
+            ))}
             </motion.div>
           </div>
         </section>
@@ -292,55 +303,80 @@ const Home = () => {
 
             <div className="grid md:grid-cols-3 gap-8">
               {portalCards.map((card, index) => (
-                <motion.div
+                <ScrollReveal
                   key={card.role}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  viewport={{ once: true }}
+                  direction="up"
+                  delay={index * 0.2}
                   className="group floating-card"
                 >
-                  <Card className={`portal-card ${card.gradient} border-0 shadow-floating h-full relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-                    <CardContent className="p-8 relative z-10 space-y-6">
-                      <div className="flex items-center justify-between">
-                        <div className="w-16 h-16 rounded-2xl glass border border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <card.icon className="h-8 w-8 text-white" />
+                  <motion.div
+                    whileHover={{
+                      scale: 1.05,
+                      rotateX: 5,
+                      rotateY: 3
+                    }}
+                    whileTap={{
+                      scale: 0.95,
+                      transition: { duration: 0.1 }
+                    }}
+                    className="h-full"
+                  >
+                    <Card className={`portal-card ${card.gradient} border-0 shadow-floating h-full relative overflow-hidden press-down`}>
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                      <CardContent className="p-8 relative z-10 space-y-6">
+                        <div className="flex items-center justify-between">
+                          <motion.div 
+                            className="w-16 h-16 rounded-2xl glass border border-white/20 flex items-center justify-center"
+                            whileHover={{ 
+                              scale: 1.15, 
+                              rotateY: 180,
+                              transition: { duration: 0.6 }
+                            }}
+                          >
+                            <card.icon className="h-8 w-8 text-white" />
+                          </motion.div>
+                          <Badge className="bg-white/20 text-white border-0 text-xs">
+                            {card.stats}
+                          </Badge>
                         </div>
-                        <Badge className="bg-white/20 text-white border-0 text-xs">
-                          {card.stats}
-                        </Badge>
-                      </div>
-                      
-                      <div>
-                        <h3 className="font-display text-2xl text-white mb-3">
-                          {card.title}
-                        </h3>
-                        <p className="text-white/90 leading-relaxed text-lg">
-                          {card.description}
-                        </p>
-                      </div>
+                        
+                        <div>
+                          <h3 className="font-display text-2xl text-white mb-3">
+                            {card.title}
+                          </h3>
+                          <p className="text-white/90 leading-relaxed text-lg">
+                            {card.description}
+                          </p>
+                        </div>
 
-                      <div className="space-y-3">
-                        {card.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-center gap-3 text-white/80">
-                            <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
+                        <div className="space-y-3">
+                          {card.features.map((feature, featureIndex) => (
+                            <motion.div 
+                              key={featureIndex} 
+                              className="flex items-center gap-3 text-white/80"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ delay: featureIndex * 0.1 }}
+                              viewport={{ once: true }}
+                            >
+                              <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                              <span>{feature}</span>
+                            </motion.div>
+                          ))}
+                        </div>
 
-                      <Link to={`/auth/login?role=${card.role}`} className="block">
-                        <Button 
-                          className="w-full glass border border-white/20 hover:bg-white/20 text-white hover:scale-105 transition-all duration-300 group mt-6"
-                        >
-                          Access Portal
-                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                        <Link to={`/auth/login?role=${card.role}`} className="block">
+                          <Button 
+                            className="w-full glass border border-white/20 hover:bg-white/20 text-white hover:scale-105 transition-all duration-300 group mt-6 ripple-effect"
+                          >
+                            Access Portal
+                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -459,23 +495,33 @@ const Home = () => {
                 className="grid grid-cols-2 gap-6"
               >
                 {galleryImages.map((image, index) => (
-                  <motion.div
+                  <ScrollReveal
                     key={index}
-                    whileHover={{ scale: 1.05, rotateY: 5 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="relative group overflow-hidden rounded-2xl aspect-square"
+                    direction="up"
+                    delay={index * 0.15}
+                    className="relative group overflow-hidden rounded-2xl aspect-square image-zoom"
                   >
-                    <img
+                    <motion.img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover"
                       loading="lazy"
+                      whileHover={{ 
+                        scale: 1.1,
+                        transition: { duration: 0.6, ease: "easeOut" }
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <motion.div 
+                      className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      viewport={{ once: true }}
+                    >
                       <h4 className="text-white font-semibold text-sm">{image.title}</h4>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  </ScrollReveal>
                 ))}
               </motion.div>
             </div>

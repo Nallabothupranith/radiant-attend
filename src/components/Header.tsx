@@ -51,23 +51,16 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`relative font-medium transition-colors duration-300 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-md px-2 py-1 ${
-                  location.pathname === item.path
-                    ? 'text-primary'
-                    : 'text-muted-foreground'
-                }`}
-              >
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`nav-underline font-medium transition-colors duration-300 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-md px-2 py-1 ${
+                    location.pathname === item.path
+                      ? 'text-primary active'
+                      : 'text-muted-foreground'
+                  }`}
+                >
                 {item.name}
-                {location.pathname === item.path && (
-                  <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    layoutId="activeTab"
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  />
-                )}
               </Link>
             ))}
           </nav>
@@ -79,7 +72,7 @@ const Header = () => {
               EN
             </Button>
             <Link to="/auth/login">
-              <Button className="bg-gradient-student hover:bg-student-hover text-white shadow-soft hover:shadow-glow hover:scale-105 transition-all duration-300">
+              <Button className="bg-gradient-student hover:bg-student-hover text-white shadow-soft hover:shadow-glow hover:scale-105 transition-all duration-300 ripple-effect press-down">
                 Login
               </Button>
             </Link>

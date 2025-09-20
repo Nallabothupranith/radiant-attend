@@ -5,6 +5,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Users, Award, Target, Heart, GraduationCap } from 'lucide-react';
 import Header from '@/components/Header';
+import ScrollReveal from '@/components/ScrollReveal';
+import AnimatedCounter from '@/components/AnimatedCounter';
 import teamImage from '@/assets/about-team-1.jpg';
 import counselImage from '@/assets/about-counsel-1.jpg';
 import studentImage from '@/assets/about-student-1.jpg';
@@ -109,19 +111,27 @@ const About = () => {
               className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
             >
               <div className="text-center">
-                <div className="text-4xl font-display text-student mb-2">500+</div>
+                <div className="text-4xl font-display text-student mb-2">
+                  <AnimatedCounter end={500} suffix="+" />
+                </div>
                 <div className="text-muted-foreground">Institutions</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-display text-counselor mb-2">50K+</div>
+                <div className="text-4xl font-display text-counselor mb-2">
+                  <AnimatedCounter end={50} suffix="K+" />
+                </div>
                 <div className="text-muted-foreground">Students</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-display text-admin mb-2">95%</div>
+                <div className="text-4xl font-display text-admin mb-2">
+                  <AnimatedCounter end={95} suffix="%" />
+                </div>
                 <div className="text-muted-foreground">Success Rate</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-display text-primary mb-2">3+</div>
+                <div className="text-4xl font-display text-primary mb-2">
+                  <AnimatedCounter end={3} suffix="+" />
+                </div>
                 <div className="text-muted-foreground">Years</div>
               </div>
             </motion.div>
@@ -255,38 +265,49 @@ const About = () => {
 
             <div className="grid md:grid-cols-3 gap-8">
               {teamMembers.map((member, index) => (
-                <motion.div
+                <ScrollReveal
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -4 }}
+                  direction="up"
+                  delay={index * 0.2}
                   className="group"
                 >
-                  <Card className="p-6 hover:shadow-lifted transition-all duration-300">
-                    <CardContent className="text-center space-y-4">
-                      <div className="relative mx-auto w-24 h-24 rounded-full overflow-hidden">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-xl text-foreground">
-                          {member.name}
-                        </h3>
-                        <p className="text-primary font-medium">
-                          {member.role}
+                  <motion.div
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className={`float-${index % 3 === 0 ? 'slow' : index % 3 === 1 ? 'medium' : 'fast'}`}
+                  >
+                    <Card className="p-6 hover:shadow-glow-intense hover-glow transition-all duration-500 glass">
+                      <CardContent className="text-center space-y-4">
+                        <motion.div 
+                          className="relative mx-auto w-24 h-24 rounded-full overflow-hidden"
+                          whileHover={{ 
+                            scale: 1.1,
+                            rotateY: 15,
+                            transition: { duration: 0.4 }
+                          }}
+                        >
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </motion.div>
+                        <div>
+                          <h3 className="font-display text-xl text-foreground">
+                            {member.name}
+                          </h3>
+                          <p className="text-primary font-medium">
+                            {member.role}
+                          </p>
+                        </div>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          {member.bio}
                         </p>
-                      </div>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {member.bio}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -312,23 +333,36 @@ const About = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {galleryImages.map((image, index) => (
-                <motion.div
+                <ScrollReveal
                   key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  className="relative group overflow-hidden rounded-2xl"
+                  direction="up"
+                  delay={index * 0.1}
+                  className="relative group overflow-hidden rounded-2xl image-zoom"
                 >
-                  <img
+                  <motion.img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-48 md:h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-48 md:h-64 object-cover"
                     loading="lazy"
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotateZ: index % 2 === 0 ? 1 : -1,
+                      transition: { duration: 0.6, ease: "easeOut" }
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                  />
+                  <motion.div
+                    className="absolute bottom-4 left-4 right-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                  >
+                    <h4 className="font-semibold text-sm">{image.alt}</h4>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -355,7 +389,7 @@ const About = () => {
                 <Link to="/contact">
                   <Button 
                     size="lg"
-                    className="bg-gradient-student hover:bg-student-hover text-white shadow-lifted hover:shadow-glow hover:scale-105 transition-all duration-300 group"
+                    className="bg-gradient-student hover:bg-student-hover text-white shadow-lifted hover:shadow-glow hover:scale-105 transition-all duration-300 group ripple-effect press-down"
                   >
                     Get Started Today
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -365,7 +399,7 @@ const About = () => {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    className="border-2 hover:bg-primary/5 hover:border-primary hover:scale-105 transition-all duration-300"
+                    className="border-2 hover:bg-primary/5 hover:border-primary hover:scale-105 transition-all duration-300 ripple-effect press-down"
                   >
                     Learn More
                   </Button>
