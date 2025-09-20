@@ -243,10 +243,7 @@ const Home = () => {
                   </motion.div>
                 </div>
               </motion.div>
-            </div>
-                </div>
-              </motion.div>
-            </div>
+            </motion.div>
 
             {/* Stats Row */}
             <motion.div
@@ -591,7 +588,6 @@ const Home = () => {
                   Transforming student success through intelligent attendance analytics and proactive support systems.
                 </p>
                 <div className="flex gap-4">
-                  {/* Social links placeholder */}
                   <div className="w-10 h-10 glass rounded-lg flex items-center justify-center hover-glow cursor-pointer">
                     <div className="w-4 h-4 bg-primary rounded" />
                   </div>
@@ -611,8 +607,8 @@ const Home = () => {
                   {['Home', 'About', 'Contact', 'Feedback'].map((link) => (
                     <li key={link}>
                       <Link
-                        to={`/${link.toLowerCase() === 'home' ? '' : link.toLowerCase()}`}
-                        className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:translate-x-1 inline-block"
+                        to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
+                        className="text-muted-foreground hover:text-primary transition-colors"
                       >
                         {link}
                       </Link>
@@ -621,44 +617,46 @@ const Home = () => {
                 </ul>
               </div>
 
-              {/* Portals */}
-              <div>
-                <h4 className="font-display text-lg text-foreground mb-6">Portals</h4>
-                <ul className="space-y-4">
-                  {['Student Portal', 'Counselor Portal', 'Admin Portal'].map((portal) => (
-                    <li key={portal}>
-                      <Link
-                        to="/auth/login"
-                        className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:translate-x-1 inline-block"
-                      >
-                        {portal}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               {/* Resources */}
               <div>
-                <h4 className="font-display text-lg text-foreground mb-6">Support</h4>
+                <h4 className="font-display text-lg text-foreground mb-6">Resources</h4>
                 <ul className="space-y-4">
-                  {['Help Center', 'Documentation', 'Privacy Policy', 'Terms of Service'].map((item) => (
-                    <li key={item}>
+                  {['Documentation', 'API Reference', 'Support', 'Status'].map((link) => (
+                    <li key={link}>
                       <a
                         href="#"
-                        className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:translate-x-1 inline-block"
+                        className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        {item}
+                        {link}
                       </a>
                     </li>
                   ))}
                 </ul>
               </div>
+
+              {/* Contact & Socials */}
+              <div>
+                <h4 className="font-display text-lg text-foreground mb-6">Connect</h4>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Mail className="h-4 w-4 text-primary" />
+                    <span>hello@attendanceportal.com</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Phone className="h-4 w-4 text-primary" />
+                    <span>+1 (555) 123-4567</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <MapPin className="h-4 w-4 text-primary" />
+                    <span>San Francisco, CA</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="border-t border-border/20 mt-16 pt-8 text-center">
+            <div className="border-t border-border/20 mt-12 pt-8 text-center">
               <p className="text-muted-foreground">
-                © 2024 AttendancePortal. All rights reserved. Built with ❤️ for education.
+                © 2024 AttendancePortal. All rights reserved.
               </p>
             </div>
           </div>
