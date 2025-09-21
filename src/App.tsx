@@ -25,6 +25,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import BranchAnalytics from "./pages/admin/BranchAnalytics";
 import StudentManagement from "./pages/admin/StudentManagement";
 import CounselorManagement from "./pages/admin/CounselorManagement";
+// Counselor Portal Pages
+import CounselorDashboard from "./pages/counselor/CounselorDashboard";
+import AttendanceAndAcademics from "./pages/counselor/AttendanceAndAcademics";
+import CounselingRequests from "./pages/counselor/CounselingRequests";
+import CounselorNotifications from "./pages/counselor/CounselorNotifications";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +60,12 @@ const AnimatedRoutes = () => {
         <Route path="/admin/branch-analytics" element={<PageTransition><BranchAnalytics /></PageTransition>} />
         <Route path="/admin/students" element={<PageTransition><StudentManagement /></PageTransition>} />
         <Route path="/admin/counselors" element={<PageTransition><CounselorManagement /></PageTransition>} />
+        
+        {/* Counselor Portal Routes */}
+        <Route path="/counselor" element={<PageTransition><CounselorDashboard /></PageTransition>} />
+        <Route path="/counselor/attendance-academics" element={<PageTransition><AttendanceAndAcademics /></PageTransition>} />
+        <Route path="/counselor/counseling-requests" element={<PageTransition><CounselingRequests /></PageTransition>} />
+        <Route path="/counselor/notifications" element={<PageTransition><CounselorNotifications /></PageTransition>} />
         
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
