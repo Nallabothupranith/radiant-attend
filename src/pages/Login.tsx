@@ -66,7 +66,11 @@ const Login = () => {
     });
 
     setTimeout(() => {
-      navigate('/');
+      if (formData.role === 'student') {
+        navigate('/student');
+      } else {
+        navigate('/');
+      }
     }, 1000);
   };
 
