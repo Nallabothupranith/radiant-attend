@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Edit, Mail, Phone, MapPin, Calendar, BookOpen, Save, X } from "lucide-react";
+import { Edit, Mail, Phone, MapPin, Calendar, BookOpen, Save, X, User, Users, Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const StudentProfile = () => {
@@ -26,7 +27,11 @@ const StudentProfile = () => {
     eapcetRank: "12345",
     caste: "BC-A",
     income: "₹8,00,000",
-    fatherWork: "Government Employee"
+    fatherWork: "Government Employee",
+    fatherName: "Ramesh Goud",
+    dateOfBirth: "15/08/2003",
+    motherName: "Lakshmi Goud",
+    motherOccupation: "Housewife"
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -49,48 +54,91 @@ const StudentProfile = () => {
       <Navigation />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Student Profile</h1>
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Student Profile
+          </h1>
           <p className="text-muted-foreground">Manage your personal and academic information</p>
-        </div>
+        </motion.div>
 
         {/* Student Profile Card */}
-        <Card className="shadow-card">
-          <CardHeader className="flex flex-row items-center justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <Card className="shadow-card hover:shadow-glow/30 transition-all duration-500 backdrop-blur-sm border-primary/10">
+          <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-primary/5 to-secondary/5 rounded-t-lg">
             <div className="flex items-center gap-4">
-              <Avatar className="w-16 h-16">
-                <AvatarImage src={studentInfo.avatar} alt={studentInfo.name} />
-                <AvatarFallback className="text-xl bg-gradient-primary text-primary-foreground">
-                  {studentInfo.name.split(' ').map(n => n[0]).join('')}
-                </AvatarFallback>
-              </Avatar>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <Avatar className="w-16 h-16 border-2 border-primary/20 shadow-lg">
+                  <AvatarImage src={studentInfo.avatar} alt={studentInfo.name} />
+                  <AvatarFallback className="text-xl bg-gradient-primary text-primary-foreground">
+                    {studentInfo.name.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
+                </Avatar>
+              </motion.div>
               <div>
-                <CardTitle className="text-2xl">{studentInfo.name}</CardTitle>
-                <div className="text-muted-foreground">{studentInfo.rollNo}</div>
-                <Badge variant="secondary" className="mt-1">{studentInfo.department}</Badge>
+                <CardTitle className="text-2xl bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
+                  {studentInfo.name}
+                </CardTitle>
+                <div className="text-muted-foreground font-medium">{studentInfo.rollNo}</div>
+                <Badge variant="secondary" className="mt-1 bg-primary/10 text-primary border-primary/20">
+                  {studentInfo.department}
+                </Badge>
               </div>
             </div>
             {!isEditing ? (
-              <Button variant="outline" onClick={() => setIsEditing(true)}>
-                <Edit className="h-4 w-4 mr-2" />
-                Edit Profile
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button 
+                  variant="outline" 
+                  onClick={() => setIsEditing(true)}
+                  className="bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/30 hover:from-primary/20 hover:to-secondary/20"
+                >
+                  <Edit className="h-4 w-4 mr-2" />
+                  Edit Profile
+                </Button>
+              </motion.div>
             ) : (
               <div className="flex gap-2">
-                <Button variant="default" onClick={handleSave}>
-                  <Save className="h-4 w-4 mr-2" />
-                  Save
-                </Button>
-                <Button variant="outline" onClick={handleCancel}>
-                  <X className="h-4 w-4 mr-2" />
-                  Cancel
-                </Button>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button 
+                    variant="default" 
+                    onClick={handleSave}
+                    className="bg-gradient-to-r from-success to-success/80 hover:from-success/90 hover:to-success/70"
+                  >
+                    <Save className="h-4 w-4 mr-2" />
+                    Save Changes
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button variant="outline" onClick={handleCancel}>
+                    <X className="h-4 w-4 mr-2" />
+                    Cancel
+                  </Button>
+                </motion.div>
               </div>
             )}
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-8 pt-8">
             {/* Basic Information */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
                 {isEditing ? (
@@ -258,6 +306,38 @@ const StudentProfile = () => {
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="dateofbirth">Date of Birth</Label>
+                {isEditing ? (
+                  <Input 
+                    id="dateofbirth" 
+                    value={studentInfo.dateOfBirth}
+                    onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.dateOfBirth}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="fathername">Father's Name</Label>
+                {isEditing ? (
+                  <Input 
+                    id="fathername" 
+                    value={studentInfo.fatherName}
+                    onChange={(e) => handleInputChange('fatherName', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <User className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.fatherName}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="fatherwork">Father's Occupation</Label>
                 {isEditing ? (
                   <Input 
@@ -266,15 +346,53 @@ const StudentProfile = () => {
                     onChange={(e) => handleInputChange('fatherWork', e.target.value)}
                   />
                 ) : (
-                  <div className="text-sm p-2 border rounded-md">
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <Briefcase className="h-4 w-4 text-muted-foreground" />
                     <span>{studentInfo.fatherWork}</span>
                   </div>
                 )}
               </div>
-            </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="mothername">Mother's Name</Label>
+                {isEditing ? (
+                  <Input 
+                    id="mothername" 
+                    value={studentInfo.motherName}
+                    onChange={(e) => handleInputChange('motherName', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <User className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.motherName}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="motheroccupation">Mother's Occupation</Label>
+                {isEditing ? (
+                  <Input 
+                    id="motheroccupation" 
+                    value={studentInfo.motherOccupation}
+                    onChange={(e) => handleInputChange('motherOccupation', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <Briefcase className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.motherOccupation}</span>
+                  </div>
+                )}
+              </div>
+            </motion.div>
 
             {/* Profile Photo Upload */}
             {isEditing && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
               <div className="space-y-2">
                 <Label htmlFor="photo">Profile Photo</Label>
                 <div className="flex items-center gap-4">
@@ -282,9 +400,11 @@ const StudentProfile = () => {
                   <Button variant="outline">Upload</Button>
                 </div>
               </div>
+              </motion.div>
             )}
           </CardContent>
         </Card>
+        </motion.div>
 
       </div>
     </div>
