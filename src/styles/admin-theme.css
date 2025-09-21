@@ -1,0 +1,453 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Advanced Admin Dashboard Design System with React Bits Inspired Effects
+All colors MUST be HSL. */
+
+@layer base {
+  :root {
+    /* Core Background System */
+    --background: 0 0% 100%;
+    --background-alt: 220 20% 98%;
+    --foreground: 216 84% 15%; /* #0A2540 for headings */
+    --foreground-muted: 0 0% 20%; /* #333 for descriptions */
+
+    /* Glass Card System */
+    --card: 0 0% 100%;
+    --card-glass: 240 10% 97%;
+    --card-foreground: 240 10% 3.9%;
+    --card-border: 240 3.7% 85%;
+
+    /* Aurora Color Palette */
+    --aurora-primary: 262 83% 58%;
+    --aurora-secondary: 213 77% 54%;
+    --aurora-accent: 158 64% 52%;
+    --aurora-warning: 43 96% 56%;
+    --aurora-danger: 0 84% 60%;
+    --aurora-success: 142 69% 58%;
+
+    /* Primary Brand Colors */
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 262 83% 78%;
+
+    /* Secondary Colors */
+    --secondary: 240 3.7% 96%;
+    --secondary-foreground: 240 10% 3.9%;
+
+    /* Interactive States */
+    --muted: 240 3.7% 96%;
+    --muted-foreground: 240 5% 45%;
+
+    --accent: 213 77% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* UI Elements */
+    --border: 240 3.7% 85%;
+    --input: 240 3.7% 96%;
+    --ring: 262 83% 58%;
+
+    /* High Risk Colors */
+    --risk-high: 0 84% 60%;
+    --risk-medium: 43 96% 56%;
+    --risk-low: 142 69% 58%;
+
+    /* Gradients */
+    --gradient-aurora: linear-gradient(135deg, hsl(var(--aurora-primary)) 0%, hsl(var(--aurora-secondary)) 50%, hsl(var(--aurora-accent)) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(var(--card-glass) / 0.8) 0%, hsl(var(--card) / 0.4) 100%);
+    --gradient-border: linear-gradient(135deg, hsl(var(--aurora-primary) / 0.3) 0%, hsl(var(--aurora-secondary) / 0.3) 100%);
+    --gradient-blue-cyan: linear-gradient(135deg, hsl(213 77% 54%) 0%, hsl(180 77% 54%) 100%);
+
+    /* Advanced Shadows */
+    --shadow-aurora: 0 0 40px hsl(var(--aurora-primary) / 0.15);
+    --shadow-glow: 0 8px 32px hsl(var(--primary) / 0.08);
+    --shadow-card: 0 4px 16px -4px hsl(220 25% 80% / 0.15), 0 2px 8px -2px hsl(220 25% 70% / 0.1);
+    --shadow-elevated: 0 10px 40px -8px hsl(220 25% 70% / 0.2), 0 4px 16px -4px hsl(220 25% 60% / 0.1);
+    --shadow-floating: 0 8px 25px -5px hsl(220 25% 80% / 0.2), 0 4px 12px -2px hsl(220 25% 70% / 0.08);
+    --shadow-hover-glow: 0 12px 35px -5px hsl(213 77% 54% / 0.25), 0 6px 16px -2px hsl(213 77% 54% / 0.15);
+    
+    /* Hover Colors */
+    --hover-soft-blue: 213 77% 96%;
+    --hover-sky-blue: 208 100% 96%; /* #E3F2FD */
+
+    /* Animation Variables */
+    --animation-speed: 0.3s;
+    --animation-curve: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Keep the same dark theme values */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Aurora Background Effect */
+  .aurora-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-aurora);
+    opacity: 0.08;
+    animation: aurora-pulse 8s infinite ease-in-out;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Light Rays Effect */
+  .light-rays {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 200%;
+    height: 100%;
+    background: conic-gradient(from 0deg at 50% 0%, transparent 0deg, hsl(var(--aurora-primary) / 0.05) 45deg, transparent 90deg, hsl(var(--aurora-secondary) / 0.05) 135deg, transparent 180deg, hsl(var(--aurora-accent) / 0.05) 225deg, transparent 270deg, hsl(var(--aurora-primary) / 0.05) 315deg, transparent 360deg);
+    transform: translateX(-50%) rotate(0deg);
+    animation: light-ray-rotate 20s linear infinite;
+    pointer-events: none;
+  }
+
+  /* Glass Card Effect */
+  .prism-card {
+    @apply bg-card border border-border/50 backdrop-blur-sm relative;
+    box-shadow: var(--shadow-floating);
+    transition: all 0.3s var(--animation-curve);
+  }
+
+  .prism-card:hover {
+    @apply bg-[hsl(var(--hover-soft-blue))];
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Glass Morphism Cards */
+  .glass-card {
+    @apply bg-card border border-border backdrop-blur-sm;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s var(--animation-curve);
+  }
+
+  .glass-card:hover {
+    @apply bg-[hsl(var(--hover-soft-blue))];
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-floating);
+  }
+
+  /* Button hover improvements */
+  .glass-elevated {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(24px);
+    border: 1px solid hsl(var(--border) / 0.4);
+    box-shadow: var(--shadow-elevated);
+    transition: all 0.3s var(--animation-curve);
+  }
+
+  .glass-elevated:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-floating);
+  }
+
+  /* Star Border Effect */
+  .star-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .star-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: var(--gradient-border);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    animation: border-glow 3s infinite ease-in-out;
+  }
+
+  /* Prism Effect for Cards */
+  .prism-card {
+    position: relative;
+    background: var(--gradient-glass);
+    backdrop-filter: blur(16px);
+    transform-style: preserve-3d;
+    transition: transform var(--animation-speed) var(--animation-curve);
+  }
+
+  .prism-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-border);
+    opacity: 0;
+    transition: opacity var(--animation-speed) var(--animation-curve);
+  }
+
+  .prism-card:hover {
+    transform: translateY(-4px) rotateX(5deg);
+  }
+
+  .prism-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Target Cursor Effect */
+  .target-cursor {
+    cursor: none;
+    position: relative;
+  }
+
+  /* Click Spark Animation */
+  .click-spark {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .click-spark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, hsl(var(--aurora-primary)) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .click-spark:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0.3;
+    transition: all 0s;
+  }
+
+  /* Logo Loop Animation */
+  .logo-loop {
+    animation: logo-pulse 2s infinite ease-in-out;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-aurora);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  /* Rotating Text */
+  .rotating-text {
+    animation: text-rotate 8s linear infinite;
+  }
+
+  /* Blur Text Effect */
+  .blur-text {
+    filter: blur(0px);
+    transition: filter 0.3s ease;
+  }
+
+  .blur-text:hover {
+    filter: blur(2px);
+  }
+
+  /* Risk Status Colors */
+  .risk-high {
+    @apply text-red-400 bg-red-500/10 border-red-500/20;
+  }
+
+  .risk-medium {
+    @apply text-yellow-400 bg-yellow-500/10 border-yellow-500/20;
+  }
+
+  .risk-low {
+    @apply text-green-400 bg-green-500/10 border-green-500/20;
+  }
+
+  /* Navigation Tabs */
+  .nav-tab {
+    @apply relative px-6 py-3 text-sm font-medium text-foreground-muted transition-all duration-300;
+    @apply hover:text-foreground hover:bg-muted/50 rounded-lg;
+  }
+
+  .nav-tab.active {
+    @apply text-primary bg-primary/10;
+  }
+
+  .nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 60%;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: 1px;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes aurora-pulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.15; }
+}
+
+@keyframes light-ray-rotate {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes border-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes logo-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes text-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes countup {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Chart container animations */
+.chart-container {
+  animation: slide-in-up 0.6s ease-out;
+}
+
+  /* Count-up animation */
+  .count-up {
+    animation: countup 0.8s ease-out;
+  }
+
+  /* Enhanced Card Hover Effects */
+  .metric-card-hover {
+    @apply cursor-pointer transition-all duration-300 ease-out;
+    @apply relative overflow-hidden;
+  }
+
+  .metric-card-hover::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(213 77% 54%) 0%, hsl(180 77% 54%) 100%);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .metric-card-hover:hover {
+    background: hsl(208 100% 96%); /* Light sky blue #E3F2FD equivalent */
+    transform: scale(1.03) translateY(-2px);
+    box-shadow: 0 12px 35px -5px hsl(213 77% 54% / 0.25), 0 6px 16px -2px hsl(213 77% 54% / 0.15);
+  }
+
+  .metric-card-hover:hover::before {
+    opacity: 1;
+  }
+
+  /* Progress Bar Hover Effect */
+  .progress-bar-hover {
+    @apply cursor-pointer transition-all duration-300 ease-out;
+    @apply p-4 rounded-lg border border-transparent;
+  }
+
+  .progress-bar-hover:hover {
+    background: hsl(208 100% 96%);
+    border-color: hsl(213 77% 80%);
+    transform: scale(1.03);
+    box-shadow: 0 12px 35px -5px hsl(213 77% 54% / 0.25), 0 6px 16px -2px hsl(213 77% 54% / 0.15);
+  }
+
+  /* Branch Analytics Stats Card Hover */
+  .branch-stats-hover {
+    @apply cursor-pointer transition-all duration-300 ease-out;
+    @apply relative overflow-hidden;
+  }
+
+  .branch-stats-hover::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(213 77% 54%) 0%, hsl(180 77% 54%) 100%);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .branch-stats-hover:hover {
+    background: hsl(208 100% 96%);
+    transform: scale(1.03) translateY(-2px);
+    box-shadow: 0 12px 35px -5px hsl(213 77% 54% / 0.25), 0 6px 16px -2px hsl(213 77% 54% / 0.15);
+  }
+
+  .branch-stats-hover:hover::before {
+    opacity: 1;
+  }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

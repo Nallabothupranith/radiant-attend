@@ -68,6 +68,8 @@ const Login = () => {
     setTimeout(() => {
       if (formData.role === 'student') {
         navigate('/student');
+      } else if (formData.role === 'admin') {
+        navigate('/admin');
       } else {
         navigate('/');
       }

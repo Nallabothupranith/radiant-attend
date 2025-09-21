@@ -20,6 +20,11 @@ import Attendance from "./pages/student/Attendance";
 import Academic from "./pages/student/Academic";
 import Notifications from "./pages/student/Notifications";
 import FeesStructure from "./pages/student/FeesStructure";
+// Admin Portal Pages
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import BranchAnalytics from "./pages/admin/BranchAnalytics";
+import StudentManagement from "./pages/admin/StudentManagement";
+import CounselorManagement from "./pages/admin/CounselorManagement";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +49,12 @@ const AnimatedRoutes = () => {
         <Route path="/student/academic" element={<PageTransition><Academic /></PageTransition>} />
         <Route path="/student/notifications" element={<PageTransition><Notifications /></PageTransition>} />
         <Route path="/student/fees" element={<PageTransition><FeesStructure /></PageTransition>} />
+        
+        {/* Admin Portal Routes */}
+        <Route path="/admin" element={<PageTransition><AdminDashboard /></PageTransition>} />
+        <Route path="/admin/branch-analytics" element={<PageTransition><BranchAnalytics /></PageTransition>} />
+        <Route path="/admin/students" element={<PageTransition><StudentManagement /></PageTransition>} />
+        <Route path="/admin/counselors" element={<PageTransition><CounselorManagement /></PageTransition>} />
         
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
