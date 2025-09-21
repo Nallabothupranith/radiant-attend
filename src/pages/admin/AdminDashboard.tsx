@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import { getStudents, getCounselors, getMeetings, initializeDummyData, branches } from "@/data/adminData";
+import AdminLayout from "@/components/admin/AdminLayout";
 
 interface DashboardStats {
   totalStudents: number;
@@ -143,19 +144,20 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background p-6 aurora-bg">
-      <div className="light-rays"></div>
-      
-      {/* Header */}
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-8"
-      >
-        <h1 className="text-4xl font-bold gradient-text mb-2">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Welcome to SchoolHub Administrative Portal</p>
-      </motion.div>
+    <AdminLayout>
+      <div className="p-6 aurora-bg">
+        <div className="light-rays"></div>
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
+          <h1 className="text-4xl font-bold gradient-text mb-2">Admin Dashboard</h1>
+          <p className="text-muted-foreground">Welcome to SchoolHub Administrative Portal</p>
+        </motion.div>
 
       {/* Stats Cards */}
       <motion.div 
@@ -302,7 +304,8 @@ const AdminDashboard = () => {
           </CardContent>
         </Card>
       </motion.div>
-    </div>
+      </div>
+    </AdminLayout>
   );
 };
 

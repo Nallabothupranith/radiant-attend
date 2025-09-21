@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { getStudents, branches, subjects } from "@/data/adminData";
+import AdminLayout from "@/components/admin/AdminLayout";
 
 interface BranchStats {
   branch: string;
@@ -169,11 +170,12 @@ const BranchAnalytics = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="aurora-bg"></div>
-      <div className="light-rays"></div>
+    <AdminLayout>
+      <div className="p-6">
+        <div className="aurora-bg"></div>
+        <div className="light-rays"></div>
 
-      {/* Header */}
+        {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -424,8 +426,9 @@ const BranchAnalytics = () => {
             </CardContent>
           </Card>
         </motion.div>
+        </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 

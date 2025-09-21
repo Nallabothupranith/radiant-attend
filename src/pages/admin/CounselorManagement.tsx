@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { getCounselors, updateCounselors, getMeetings, branches, type Counselor } from "@/data/adminData";
 import { useToast } from "@/hooks/use-toast";
+import AdminLayout from "@/components/admin/AdminLayout";
 
 const CounselorManagement = () => {
   const [counselors, setCounselors] = useState<Counselor[]>([]);
@@ -83,9 +84,10 @@ const CounselorManagement = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="aurora-bg"></div>
-      <div className="light-rays"></div>
+    <AdminLayout>
+      <div className="p-6">
+        <div className="aurora-bg"></div>
+        <div className="light-rays"></div>
 
       {/* Header */}
       <motion.div 
@@ -357,7 +359,8 @@ const CounselorManagement = () => {
           </CardContent>
         </Card>
       </motion.div>
-    </div>
+      </div>
+    </AdminLayout>
   );
 };
 

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { getStudents, updateStudents, branches, type Student } from "@/data/adminData";
 import { useToast } from "@/hooks/use-toast";
+import AdminLayout from "@/components/admin/AdminLayout";
 
 const StudentManagement = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -115,9 +116,10 @@ const StudentManagement = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="aurora-bg"></div>
-      <div className="light-rays"></div>
+    <AdminLayout>
+      <div className="p-6">
+        <div className="aurora-bg"></div>
+        <div className="light-rays"></div>
 
       {/* Header */}
       <motion.div 
@@ -356,7 +358,8 @@ const StudentManagement = () => {
           </CardContent>
         </Card>
       </motion.div>
-    </div>
+      </div>
+    </AdminLayout>
   );
 };
 
