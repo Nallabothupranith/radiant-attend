@@ -1,4 +1,4 @@
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/student/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,14 +18,15 @@ import {
   Edit,
   Camera
 } from "lucide-react";
+import { motion } from 'framer-motion';
 
-const Profile = () => {
+const StudentProfile = () => {
   const studentInfo = {
     name: "Alex Johnson",
     email: "alex.johnson@university.edu",
     phone: "+1 (555) 123-4567",
     address: "123 College Street, University City, UC 12345",
-    studentId: "CS21B1001",
+    studentId: "ST2024001",
     department: "Computer Science",
     semester: "6th",
     batch: "2021-2025",
@@ -61,12 +62,16 @@ const Profile = () => {
       <Navigation />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
           <h1 className="text-3xl font-bold mb-2">Student Profile</h1>
           <p className="text-muted-foreground">
             Manage your personal information and track your academic journey
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Profile Card */}
@@ -228,8 +233,11 @@ const Profile = () => {
                   {achievements.map((achievement, index) => {
                     const Icon = achievement.icon;
                     return (
-                      <div
+                      <motion.div
                         key={achievement.name}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.1 }}
                         className="flex items-center gap-3 p-4 bg-muted/20 rounded-lg hover:bg-muted/30 transition-colors"
                       >
                         <div className="p-2 bg-primary/10 rounded-lg">
@@ -240,7 +248,7 @@ const Profile = () => {
                           <p className="text-sm text-muted-foreground">{achievement.description}</p>
                           <p className="text-xs text-muted-foreground">{achievement.date}</p>
                         </div>
-                      </div>
+                      </motion.div>
                     );
                   })}
                 </div>
@@ -253,4 +261,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default StudentProfile;

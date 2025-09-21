@@ -1,5 +1,5 @@
-import Navigation from "@/components/Navigation";
-import StatCard from "@/components/StatCard";
+import Navigation from "@/components/student/Navigation";
+import StatCard from "@/components/student/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
