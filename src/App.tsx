@@ -12,7 +12,8 @@ import Feedback from "./pages/Feedback";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 // Student Portal Pages
-import StudentDashboard from "./pages/StudentDashboard";
+import StudentDashboard from "./pages/student/StudentDashboard";
+import StudentProfile from "./pages/student/StudentProfile";
 import RiskPrediction from "./pages/student/RiskPrediction";
 import CounselingRequest from "./pages/student/CounselingRequest";
 import Attendance from "./pages/student/Attendance";
@@ -36,7 +37,7 @@ const AnimatedRoutes = () => {
         
         {/* Student Portal Routes */}
         <Route path="/student" element={<PageTransition><StudentDashboard /></PageTransition>} />
-        <Route path="/student/dashboard" element={<PageTransition><StudentDashboard /></PageTransition>} />
+        <Route path="/student/profile" element={<PageTransition><StudentProfile /></PageTransition>} />
         <Route path="/student/risk-prediction" element={<PageTransition><RiskPrediction /></PageTransition>} />
         <Route path="/student/counseling" element={<PageTransition><CounselingRequest /></PageTransition>} />
         <Route path="/student/attendance" element={<PageTransition><Attendance /></PageTransition>} />
