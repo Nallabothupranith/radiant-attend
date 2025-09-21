@@ -23,7 +23,19 @@ import FeesStructure from "./pages/student/FeesStructure";
 
 const queryClient = new QueryClient();
 
-const AnimatedRoutes = () => {
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <AnimatedRoutesInner />
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+const AnimatedRoutesInner = () => {
   const location = useLocation();
   
   return (
@@ -51,17 +63,5 @@ const AnimatedRoutes = () => {
     </AnimatePresence>
   );
 };
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AnimatedRoutes />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
 
 export default App;
