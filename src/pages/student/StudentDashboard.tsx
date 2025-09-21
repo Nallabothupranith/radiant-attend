@@ -1,5 +1,5 @@
-import Navigation from "@/components/Navigation";
-import StatCard from "@/components/StatCard";
+import Navigation from "@/components/student/Navigation";
+import StatCard from "@/components/student/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +16,7 @@ import {
   Users,
   Trophy
 } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -36,8 +36,8 @@ const StudentDashboard = () => {
   const quickStats = [
     { title: "CGPA", value: studentData.cgpa, icon: BookOpen, trend: { value: "+0.2 this sem", positive: true }, variant: "success" },
     { title: "Attendance", value: `${studentData.attendance}%`, icon: Calendar, trend: { value: "-5% this month", positive: false }, variant: "warning" },
-    { title: "Total Subjects", value: 6, icon: BookOpen, trend: { value: "Current semester", positive: true }, variant: "default" },
-    { title: "Assignments", value: 12, icon: Award, trend: { value: "3 pending", positive: false }, variant: "warning" }
+    { title: "XP Points", value: studentData.xpPoints, icon: Trophy, trend: { value: "+120 this week", positive: true }, variant: "default" },
+    { title: "Current Level", value: studentData.level, icon: Award, trend: { value: "Next: 1350 XP", positive: true }, variant: "success" }
   ];
 
   const weeklyPerformance = [
@@ -60,12 +60,6 @@ const StudentDashboard = () => {
     { title: "Database Management Mid-Exam", date: "Feb 15, 2024", type: "exam" },
     { title: "Counseling Session", date: "Feb 12, 2024", type: "meeting" },
     { title: "Assignment Due: Data Structures", date: "Feb 10, 2024", type: "assignment" }
-  ];
-
-  const riskData = [
-    { name: 'Low Risk', value: 25, color: 'hsl(var(--success))' },
-    { name: 'Medium Risk', value: 45, color: 'hsl(var(--warning))' },
-    { name: 'High Risk', value: 30, color: 'hsl(var(--destructive))' }
   ];
 
   const getRiskColor = (level: string) => {
@@ -97,28 +91,13 @@ const StudentDashboard = () => {
         </motion.div>
 
         {/* Quick Stats */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {quickStats.map((stat, index) => (
             <motion.div
               key={stat.title}
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ 
-                delay: index * 0.15, 
-                duration: 0.5,
-                type: "spring",
-                stiffness: 100
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.2 }
-              }}
-              className="transform-gpu"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
             >
               <StatCard
                 title={stat.title}
@@ -129,241 +108,139 @@ const StudentDashboard = () => {
               />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Performance Chart */}
-          <motion.div 
-            className="lg:col-span-2"
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-          >
-            <Card className="shadow-card hover:shadow-glow/30 transition-all duration-500 backdrop-blur-sm border-primary/10">
-              <CardHeader className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-t-lg">
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-primary" />
-                  Weekly Performance Analytics
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={weeklyPerformance}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" />
-                    <XAxis dataKey="week" stroke="hsl(var(--muted-foreground))" />
-                    <YAxis stroke="hsl(var(--muted-foreground))" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: 'hsl(var(--card))', 
-                        border: '1px solid hsl(var(--border))',
-                        borderRadius: '8px',
-                        boxShadow: '0 10px 30px -10px hsl(var(--primary) / 0.3)'
-                      }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="performance" 
-                      stroke="hsl(var(--primary))" 
-                      strokeWidth={3}
-                      name="Performance"
-                      dot={{ fill: 'hsl(var(--primary))', strokeWidth: 2, r: 4 }}
-                      activeDot={{ r: 6, stroke: 'hsl(var(--primary))', strokeWidth: 2 }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="attendance" 
-                      stroke="hsl(var(--secondary))" 
-                      strokeWidth={3}
-                      name="Attendance"
-                      dot={{ fill: 'hsl(var(--secondary))', strokeWidth: 2, r: 4 }}
-                      activeDot={{ r: 6, stroke: 'hsl(var(--secondary))', strokeWidth: 2 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <Card className="lg:col-span-2 shadow-card hover:shadow-glow/20 transition-all duration-300">
+            <CardHeader>
+              <CardTitle>Weekly Performance</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={weeklyPerformance}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="week" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line 
+                    type="monotone" 
+                    dataKey="performance" 
+                    stroke="hsl(var(--primary))" 
+                    strokeWidth={2}
+                    name="Performance"
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="attendance" 
+                    stroke="hsl(var(--secondary))" 
+                    strokeWidth={2}
+                    name="Attendance"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
 
-          {/* Risk Assessment Pie Chart */}
-          <motion.div
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <Card className="shadow-card hover:shadow-glow/30 transition-all duration-500 backdrop-blur-sm border-warning/10">
-              <CardHeader className="bg-gradient-to-r from-warning/5 to-destructive/5 rounded-t-lg">
-                <CardTitle className="flex items-center gap-2">
-                  <Brain className="h-5 w-5 text-warning" />
-                  Risk Distribution
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="text-center mb-4">
-                  <Badge 
-                    variant="secondary" 
-                    className={`text-sm px-3 py-1 ${
-                      studentData.riskLevel === 'Medium' 
-                        ? 'bg-warning/10 text-warning border-warning/20' 
-                        : ''
-                    }`}
-                  >
-                    {studentData.riskLevel} Risk Student
-                  </Badge>
-                  <p className="text-xs text-muted-foreground mt-2">
-                    Current academic risk analysis
-                  </p>
+          {/* Risk Assessment */}
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Brain className="h-5 w-5" />
+                Risk Assessment
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="text-center">
+              <Badge variant="secondary" className="text-sm">
+                {studentData.riskLevel} Risk
+              </Badge>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Based on attendance and performance patterns
+                </p>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span>Attendance Impact</span>
+                  <span>65%</span>
                 </div>
-                
-                <ResponsiveContainer width="100%" height={200}>
-                  <PieChart>
-                    <Pie
-                      data={riskData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={40}
-                      outerRadius={80}
-                      paddingAngle={2}
-                      dataKey="value"
-                    >
-                      {riskData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: 'hsl(var(--card))', 
-                        border: '1px solid hsl(var(--border))',
-                        borderRadius: '8px'
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-                
-                <div className="space-y-2 mt-4">
-                  {riskData.map((item, index) => (
-                    <div key={index} className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2">
-                        <div 
-                          className="w-3 h-3 rounded-full" 
-                          style={{ backgroundColor: item.color }}
-                        />
-                        <span>{item.name}</span>
-                      </div>
-                      <span className="font-medium">{item.value}%</span>
-                    </div>
-                  ))}
+                <Progress value={65} className="h-2" />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span>Academic Performance</span>
+                  <span>78%</span>
                 </div>
-                
-                <Link to="/student/risk-prediction">
-                  <Button className="w-full mt-4 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300" variant="default">
-                    <Brain className="h-4 w-4 mr-2" />
-                    Detailed Risk Analysis
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </motion.div>
+                <Progress value={78} className="h-2" />
+              </div>
+              
+              <Link to="/student/risk-prediction">
+                <Button className="w-full mt-4" variant="outline">
+                  View Detailed Analysis
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recent Activities */}
-          <motion.div
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-          >
-            <Card className="shadow-card hover:shadow-glow/30 transition-all duration-500 backdrop-blur-sm border-success/10">
-              <CardHeader className="bg-gradient-to-r from-success/5 to-primary/5 rounded-t-lg">
-                <CardTitle className="flex items-center gap-2">
-                  <Trophy className="h-5 w-5 text-success" />
-                  Recent Activities
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="space-y-4">
-                  {recentActivities.map((activity, index) => (
-                    <motion.div 
-                      key={index} 
-                      className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-muted/10 to-muted/5 border border-muted/20 hover:border-primary/30 transition-all duration-300"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                    >
-                      <motion.div 
-                        className={`w-3 h-3 rounded-full ${
-                          activity.status === 'success' ? 'bg-success' :
-                          activity.status === 'warning' ? 'bg-warning' :
-                          activity.status === 'info' ? 'bg-primary' : 'bg-muted-foreground'
-                        }`}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: index * 0.1 + 0.2, type: "spring" }}
-                      />
-                      <div className="flex-1">
-                        <p className="text-sm font-medium">{activity.title}</p>
-                        <p className="text-xs text-muted-foreground">{activity.time}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300">
+            <CardHeader>
+              <CardTitle>Recent Activities</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {recentActivities.map((activity, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-muted/20">
+                    <div className={`w-2 h-2 rounded-full ${
+                      activity.status === 'success' ? 'bg-green-500' :
+                      activity.status === 'warning' ? 'bg-yellow-500' :
+                      activity.status === 'info' ? 'bg-blue-500' : 'bg-gray-500'
+                    }`} />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{activity.title}</p>
+                      <p className="text-xs text-muted-foreground">{activity.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Upcoming Events */}
-          <motion.div
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-          >
-            <Card className="shadow-card hover:shadow-glow/30 transition-all duration-500 backdrop-blur-sm border-primary/10">
-              <CardHeader className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-t-lg">
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-primary" />
-                  Upcoming Events
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="space-y-4">
-                  {upcomingEvents.map((event, index) => (
-                    <motion.div 
-                      key={index} 
-                      className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-muted/10 to-muted/5 border border-muted/20 hover:border-primary/30 transition-all duration-300"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ x: -5, transition: { duration: 0.2 } }}
-                    >
-                      <motion.div 
-                        className={`p-2 rounded-md transition-all duration-300 ${
-                          event.type === 'exam' ? 'bg-destructive/10 text-destructive border border-destructive/20' :
-                          event.type === 'meeting' ? 'bg-primary/10 text-primary border border-primary/20' :
-                          'bg-success/10 text-success border border-success/20'
-                        }`}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        {event.type === 'exam' ? <AlertTriangle className="h-4 w-4" /> :
-                         event.type === 'meeting' ? <Users className="h-4 w-4" /> :
-                         <Target className="h-4 w-4" />}
-                      </motion.div>
-                      <div className="flex-1">
-                        <p className="text-sm font-medium">{event.title}</p>
-                        <p className="text-xs text-muted-foreground">{event.date}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </motion.div>
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5" />
+                Upcoming Events
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {upcomingEvents.map((event, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-muted/20">
+                    <div className={`p-2 rounded-md ${
+                      event.type === 'exam' ? 'bg-red-100 text-red-600 dark:bg-red-950 dark:text-red-400' :
+                      event.type === 'meeting' ? 'bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400' :
+                      'bg-green-100 text-green-600 dark:bg-green-950 dark:text-green-400'
+                    }`}>
+                      {event.type === 'exam' ? <AlertTriangle className="h-4 w-4" /> :
+                       event.type === 'meeting' ? <Users className="h-4 w-4" /> :
+                       <Target className="h-4 w-4" />}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{event.title}</p>
+                      <p className="text-xs text-muted-foreground">{event.date}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
