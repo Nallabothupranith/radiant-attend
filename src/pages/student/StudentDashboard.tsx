@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import Navigation from "@/components/student/Navigation";
 import StatCard from "@/components/student/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +9,6 @@ import { Progress } from "@/components/ui/progress";
 import {
   BookOpen,
   Calendar,
-  TrendingUp,
   Award,
   AlertTriangle,
   Brain,
@@ -28,50 +29,24 @@ import {
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+type DashboardRow = {
+  name: string;
+  student_id: string;
+  semester: string;
+  cgpa: number;
+  attendance: number;
+  xp_points: number;
+  badges: number;
+  level: number;
+  risk_level: string;
+  email: string;
+};
+
 const StudentDashboard = () => {
-  const studentData = {
-    name: "Alex Johnson",
-    studentId: "ST2024001",
-    semester: "6th",
-    cgpa: 7.8,
-    attendance: 78,
-    xpPoints: 1250,
-    badges: 8,
-    level: 12,
-    riskLevel: "Medium",
-  };
+  const [studentData, setStudentData] = useState<DashboardRow | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const quickStats = [
-    {
-      title: "CGPA",
-      value: studentData.cgpa,
-      icon: BookOpen,
-      trend: { value: "+0.2 this sem", positive: true },
-      variant: "success",
-    },
-    {
-      title: "Attendance",
-      value: `${studentData.attendance}%`,
-      icon: Calendar,
-      trend: { value: "-5% this month", positive: false },
-      variant: "warning",
-    },
-    {
-      title: "XP Points",
-      value: studentData.xpPoints,
-      icon: Trophy,
-      trend: { value: "+120 this week", positive: true },
-      variant: "default",
-    },
-    {
-      title: "Current Level",
-      value: studentData.level,
-      icon: Award,
-      trend: { value: "Next: 1350 XP", positive: true },
-      variant: "success",
-    },
-  ];
-
+  // Fake performance chart data (you can later make a table for it if needed)
   const weeklyPerformance = [
     { week: "Week 1", performance: 85, attendance: 90 },
     { week: "Week 2", performance: 78, attendance: 85 },
@@ -122,18 +97,70 @@ const StudentDashboard = () => {
     },
   ];
 
-  const getRiskColor = (level: string) => {
-    switch (level) {
-      case "Low":
-        return "success";
-      case "Medium":
-        return "warning";
-      case "High":
-        return "destructive";
-      default:
-        return "secondary";
-    }
-  };
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from("student_dashboard")
+        .select("*")
+        .eq("email", user.email)
+        .single();
+
+      if (error) {
+        console.error("Error fetching dashboard:", error);
+        return;
+      }
+
+      setStudentData(data as DashboardRow);
+      setLoading(false);
+    };
+
+    fetchDashboard();
+  }, []);
+
+  if (loading || !studentData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-muted-foreground">Loading dashboard...</p>
+      </div>
+    );
+  }
+
+  const quickStats = [
+    {
+      title: "CGPA",
+      value: studentData.cgpa,
+      icon: BookOpen,
+      trend: { value: "+0.2 this sem", positive: true },
+      variant: "success",
+    },
+    {
+      title: "Attendance",
+      value: `${studentData.attendance}%`,
+      icon: Calendar,
+      trend: { value: "-5% this month", positive: false },
+      variant: "warning",
+    },
+    {
+      title: "XP Points",
+      value: studentData.xp_points,
+      icon: Trophy,
+      trend: { value: "+120 this week", positive: true },
+      variant: "default",
+    },
+    {
+      title: "Current Level",
+      value: studentData.level,
+      icon: Award,
+      trend: { value: "Next: 1350 XP", positive: true },
+      variant: "success",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -218,7 +245,7 @@ const StudentDashboard = () => {
             <CardContent className="space-y-4">
               <div className="text-center">
                 <Badge variant="secondary" className="text-sm">
-                  {studentData.riskLevel} Risk
+                  {studentData.risk_level} Risk
                 </Badge>
                 <p className="text-sm text-muted-foreground mt-2">
                   Based on attendance and performance patterns
@@ -228,17 +255,17 @@ const StudentDashboard = () => {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Attendance Impact</span>
-                  <span>65%</span>
+                  <span>{studentData.attendance}%</span>
                 </div>
-                <Progress value={65} className="h-2" />
+                <Progress value={studentData.attendance} className="h-2" />
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Academic Performance</span>
-                  <span>78%</span>
+                  <span>{studentData.cgpa * 10}%</span>
                 </div>
-                <Progress value={78} className="h-2" />
+                <Progress value={studentData.cgpa * 10} className="h-2" />
               </div>
 
               <Link to="/student/risk-prediction">
