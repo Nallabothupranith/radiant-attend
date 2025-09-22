@@ -1,47 +1,53 @@
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
-import { 
-  Users, 
-  UserCheck, 
-  Shield, 
-  Eye, 
-  EyeOff, 
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import {
+  Users,
+  UserCheck,
+  Shield,
+  Eye,
+  EyeOff,
   LogIn,
-  ArrowRight
-} from 'lucide-react';
-import Header from '@/components/Header';
+  ArrowRight,
+} from "lucide-react";
+import Header from "@/components/Header";
 
 const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<string>('');
+  const [selectedRole, setSelectedRole] = useState<string>("");
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    role: '',
+    email: "",
+    password: "",
+    role: "",
   });
 
   useEffect(() => {
-    const roleParam = searchParams.get('role');
-    if (roleParam && ['student', 'counselor', 'admin'].includes(roleParam)) {
+    const roleParam = searchParams.get("role");
+    if (roleParam && ["student", "counselor", "admin"].includes(roleParam)) {
       setSelectedRole(roleParam);
-      setFormData(prev => ({ ...prev, role: roleParam }));
+      setFormData((prev) => ({ ...prev, role: roleParam }));
     }
   }, [searchParams]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.email || !formData.password || !formData.role) {
       toast({
         title: "Missing Information",
@@ -54,11 +60,11 @@ const Login = () => {
     const userData = {
       email: formData.email,
       role: formData.role,
-      name: formData.email.split('@')[0],
+      name: formData.email.split("@")[0],
       loginTime: new Date().toISOString(),
     };
 
-    localStorage.setItem('attendancePortalUser', JSON.stringify(userData));
+    localStorage.setItem("attendancePortalUser", JSON.stringify(userData));
 
     toast({
       title: "Login Successful!",
@@ -66,43 +72,48 @@ const Login = () => {
     });
 
     setTimeout(() => {
-      if (formData.role === 'student') {
-        navigate('/student');
-      } else if (formData.role === 'admin') {
-        navigate('/admin');
+      if (formData.role === "student") {
+        navigate("/student");
+      } else if (formData.role === "admin") {
+        navigate("/admin");
+      } else if (
+        formData.role === "counselor" ||
+        formData.role === "counsellor"
+      ) {
+        navigate("/counselor");
       } else {
-        navigate('/');
+        navigate("/");
       }
     }, 1000);
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleRoleSelect = (role: string) => {
     setSelectedRole(role);
-    setFormData(prev => ({ ...prev, role }));
+    setFormData((prev) => ({ ...prev, role }));
   };
 
   const roleConfigs = {
     student: {
       icon: Users,
-      title: 'Student Portal',
-      description: 'Access your attendance records and academic progress',
-      gradient: 'bg-gradient-student',
+      title: "Student Portal",
+      description: "Access your attendance records and academic progress",
+      gradient: "bg-gradient-student",
     },
     counselor: {
       icon: UserCheck,
-      title: 'Counselor Portal',
-      description: 'Monitor students and provide targeted support',
-      gradient: 'bg-gradient-counselor',
+      title: "Counselor Portal",
+      description: "Monitor students and provide targeted support",
+      gradient: "bg-gradient-counselor",
     },
     admin: {
       icon: Shield,
-      title: 'Admin Portal',
-      description: 'Comprehensive system management and oversight',
-      gradient: 'bg-gradient-admin',
+      title: "Admin Portal",
+      description: "Comprehensive system management and oversight",
+      gradient: "bg-gradient-admin",
     },
   };
 
@@ -112,7 +123,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Header />
-      
+
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="blob absolute top-20 left-10 w-72 h-72 opacity-30" />
         <div className="blob absolute top-40 right-20 w-96 h-96 opacity-20" />
@@ -132,7 +143,7 @@ const Login = () => {
                 Secure Portal Access
               </Badge>
               <h1 className="font-display text-4xl lg:text-6xl leading-tight text-foreground mb-4">
-                Welcome Back to{' '}
+                Welcome Back to{" "}
                 <span className="gradient-text">AttendancePortal</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -159,7 +170,9 @@ const Login = () => {
                         type="email"
                         placeholder="Enter your email"
                         value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("email", e.target.value)
+                        }
                         required
                         className="hover:border-primary/50 focus:border-primary"
                       />
@@ -170,10 +183,12 @@ const Login = () => {
                       <div className="relative">
                         <Input
                           id="password"
-                          type={showPassword ? 'text' : 'password'}
+                          type={showPassword ? "text" : "password"}
                           placeholder="Enter your password"
                           value={formData.password}
-                          onChange={(e) => handleInputChange('password', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("password", e.target.value)
+                          }
                           required
                           className="hover:border-primary/50 focus:border-primary pr-10"
                         />
@@ -195,13 +210,20 @@ const Login = () => {
 
                     <div className="space-y-2">
                       <Label htmlFor="role">Portal Type</Label>
-                      <Select value={selectedRole} onValueChange={handleRoleSelect}>
+                      <Select
+                        value={selectedRole}
+                        onValueChange={handleRoleSelect}
+                      >
                         <SelectTrigger className="hover:border-primary/50 focus:border-primary">
                           <SelectValue placeholder="Select your portal" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="student">Student Portal</SelectItem>
-                          <SelectItem value="counselor">Counselor Portal</SelectItem>
+                          <SelectItem value="student">
+                            Student Portal
+                          </SelectItem>
+                          <SelectItem value="counselor">
+                            Counselor Portal
+                          </SelectItem>
                           <SelectItem value="admin">Admin Portal</SelectItem>
                         </SelectContent>
                       </Select>

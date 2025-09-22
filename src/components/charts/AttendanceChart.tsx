@@ -1,34 +1,29 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const attendanceData = [
-  { week: 'Week 1', present: 85, absent: 15 },
-  { week: 'Week 2', present: 78, absent: 22 },
-  { week: 'Week 3', present: 92, absent: 8 },
-  { week: 'Week 4', present: 88, absent: 12 },
-  { week: 'Week 5', present: 95, absent: 5 },
-  { week: 'Week 6', present: 87, absent: 13 },
+  { subject: 'Mathematics', attendance: 85, target: 75 },
+  { subject: 'Physics', attendance: 72, target: 75 },
+  { subject: 'Chemistry', attendance: 90, target: 75 },
+  { subject: 'English', attendance: 68, target: 75 },
+  { subject: 'Computer Science', attendance: 88, target: 75 },
 ];
 
-const monthlyTrend = [
-  { month: 'Jan', percentage: 85 },
-  { month: 'Feb', percentage: 88 },
-  { month: 'Mar', percentage: 82 },
-  { month: 'Apr', percentage: 90 },
-  { month: 'May', percentage: 87 },
-  { month: 'Jun', percentage: 89 },
+const overallAttendance = [
+  { name: 'Present', value: 82, color: 'hsl(var(--success))' },
+  { name: 'Absent', value: 18, color: 'hsl(var(--destructive))' },
 ];
 
 export function AttendanceChart() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Weekly Attendance */}
+      {/* Subject-wise Attendance */}
       <div className="bg-card rounded-lg p-6 border border-border">
-        <h3 className="text-lg font-semibold mb-4 text-card-foreground">Weekly Attendance</h3>
+        <h3 className="text-lg font-semibold mb-4 text-card-foreground">Subject-wise Attendance</h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={attendanceData}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis 
-              dataKey="week" 
+              dataKey="subject" 
               tick={{ fontSize: 12 }} 
               stroke="hsl(var(--muted-foreground))"
             />
@@ -44,37 +39,37 @@ export function AttendanceChart() {
               }}
             />
             <Bar 
-              dataKey="present" 
-              fill="hsl(var(--success))" 
+              dataKey="attendance" 
+              fill="hsl(var(--primary))"
               radius={[4, 4, 0, 0]}
-              name="Present"
             />
             <Bar 
-              dataKey="absent" 
-              fill="hsl(var(--destructive))" 
+              dataKey="target" 
+              fill="hsl(var(--muted))"
               radius={[4, 4, 0, 0]}
-              name="Absent"
             />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Monthly Trend */}
+      {/* Overall Attendance */}
       <div className="bg-card rounded-lg p-6 border border-border">
-        <h3 className="text-lg font-semibold mb-4 text-card-foreground">Attendance Trend</h3>
+        <h3 className="text-lg font-semibold mb-4 text-card-foreground">Overall Attendance</h3>
         <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={monthlyTrend}>
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis 
-              dataKey="month" 
-              tick={{ fontSize: 12 }} 
-              stroke="hsl(var(--muted-foreground))"
-            />
-            <YAxis 
-              domain={[0, 100]}
-              tick={{ fontSize: 12 }} 
-              stroke="hsl(var(--muted-foreground))"
-            />
+          <PieChart>
+            <Pie
+              data={overallAttendance}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={100}
+              paddingAngle={5}
+              dataKey="value"
+            >
+              {overallAttendance.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
             <Tooltip 
               contentStyle={{
                 backgroundColor: 'hsl(var(--card))',
@@ -82,15 +77,21 @@ export function AttendanceChart() {
                 borderRadius: '6px'
               }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="percentage" 
-              stroke="hsl(var(--primary))"
-              strokeWidth={3}
-              dot={{ fill: 'hsl(var(--primary))', strokeWidth: 2, r: 4 }}
-            />
-          </LineChart>
+          </PieChart>
         </ResponsiveContainer>
+        <div className="flex justify-center gap-4 mt-4">
+          {overallAttendance.map((item, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <div 
+                className="w-3 h-3 rounded-full" 
+                style={{ backgroundColor: item.color }}
+              />
+              <span className="text-sm text-muted-foreground">
+                {item.name}: {item.value}%
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
