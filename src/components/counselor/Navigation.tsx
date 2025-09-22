@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { UserButton } from "@clerk/clerk-react";
 
 const navigationItems = [
   { 
@@ -98,7 +99,9 @@ export default function CounselorNavigation() {
                 </p>
               </div>
             </div>
-            <Button
+            
+            <UserButton showName />
+            {/* <Button
               onClick={handleLogout}
               variant="outline"
               size="sm"
@@ -106,7 +109,7 @@ export default function CounselorNavigation() {
             >
               <LogOut className="h-4 w-4" />
               Logout
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
@@ -156,7 +159,9 @@ export default function CounselorNavigation() {
               })}
               
               {/* Mobile Logout */}
-              <Button
+              
+              <UserButton showName />
+              {/* <Button
                 onClick={handleLogout}
                 variant="outline"
                 size="sm"
@@ -164,7 +169,7 @@ export default function CounselorNavigation() {
               >
                 <LogOut className="h-4 w-4" />
                 Logout
-              </Button>
+              </Button> */}
             </nav>
           </div>
         )}

@@ -16,6 +16,7 @@ import {
   LogOut
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { UserButton } from '@clerk/clerk-react';
 
 const Navigation = () => {
   const location = useLocation();
@@ -81,8 +82,10 @@ const Navigation = () => {
                   </Link>
                 );
               })}
+
+              <UserButton showName />
               
-              <Button
+              {/* <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleLogout}
@@ -90,7 +93,7 @@ const Navigation = () => {
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
@@ -127,15 +130,17 @@ const Navigation = () => {
                     </Link>
                   );
                 })}
+
+                <UserButton showName />
                 
-                <Button
+                {/* <Button
                   variant="ghost"
                   onClick={handleLogout}
                   className="w-full justify-start text-muted-foreground hover:text-foreground mt-4"
                 >
                   <LogOut className="h-5 w-5 mr-3" />
                   Logout
-                </Button>
+                </Button> */}
               </div>
             </div>
           </motion.div>

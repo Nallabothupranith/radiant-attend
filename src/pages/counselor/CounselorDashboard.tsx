@@ -33,6 +33,7 @@ import {
   Area,
   AreaChart,
 } from "recharts";
+import { UserButton } from "@clerk/clerk-react";
 
 const summaryStats = [
   {
@@ -138,6 +139,7 @@ export default function CounselorDashboard() {
           </p>
         </div>
         <div className="flex gap-3">
+          
           <Button variant="outline" className="gap-2">
             <Calendar className="h-4 w-4" />
             Schedule Session
@@ -146,6 +148,7 @@ export default function CounselorDashboard() {
             <TrendingUp className="h-4 w-4" />
             View Reports
           </Button>
+          <UserButton showName />
         </div>
       </div>
 

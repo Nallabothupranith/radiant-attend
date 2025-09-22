@@ -39,6 +39,8 @@ import CounselorNotifications from "./pages/counselor/CounselorNotifications";
 import CounselingSessions from "./pages/counselor/CounselingSessions";
 import Analytics from "./pages/counselor/Analytics";
 import CounselorSettings from "./pages/counselor/CounselorSettings";
+import RoleRedirect from "./pages/RoleRedirect";
+import Unauthorized from "./pages/Unauthorized";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +56,15 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <Home />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/unauthorized"
+          element={
+            <PageTransition>
+              <Unauthorized />
             </PageTransition>
           }
         />
@@ -192,7 +203,7 @@ const AnimatedRoutes = () => {
 
         {/* Counselor Portal Routes (nested under CounselorLayout) */}
         <Route
-          path="/counselor"
+          path="/counsellor"
           element={
             <PageTransition>
               <CounselorLayout />
@@ -278,6 +289,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
+        <RoleRedirect />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

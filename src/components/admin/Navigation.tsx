@@ -15,9 +15,11 @@ import {
   Menu,
   X,
   Building2,
-  AlertTriangle
+  AlertTriangle,
+  User
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { UserButton } from "@clerk/clerk-react";
 
 const AdminNavigation = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -190,7 +192,9 @@ const AdminNavigation = () => {
               </motion.div>
             )}
 
-            <Button
+            <UserButton showName />
+
+            {/* <Button
               variant="ghost"
               onClick={handleLogout}
               className={`w-full justify-start gap-3 text-destructive hover:text-destructive hover:bg-destructive/10 ${
@@ -199,7 +203,7 @@ const AdminNavigation = () => {
             >
               <LogOut className="h-5 w-5 flex-shrink-0" />
               {!isCollapsed && <span>Logout</span>}
-            </Button>
+            </Button> */}
           </div>
 
           {/* Collapse Toggle (Desktop) */}

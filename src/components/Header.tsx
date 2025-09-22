@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { GraduationCap, Menu, X, Globe } from 'lucide-react';
+import { SignedIn, SignedOut, SignIn, SignInButton, UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,11 +72,23 @@ const Header = () => {
               <Globe className="h-4 w-4 mr-2" />
               EN
             </Button>
-            <Link to="/auth/login">
+            {/* <Link to="/auth/login">
               <Button className="bg-gradient-student hover:bg-student-hover text-white shadow-soft hover:shadow-glow hover:scale-105 transition-all duration-300 ripple-effect press-down">
-                Login
+                Login sdsdfsdf
               </Button>
-            </Link>
+            </Link> */}
+
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton mode="modal">
+              <Button className="bg-gradient-student hover:bg-student-hover text-white shadow-soft hover:shadow-glow hover:scale-105 transition-all duration-300 ripple-effect press-down">
+                Login 
+              </Button>
+              </SignInButton>
+
+            </SignedOut>
           </div>
 
           {/* Mobile Menu Button */}
@@ -122,11 +135,19 @@ const Header = () => {
                   <Globe className="h-4 w-4 mr-2" />
                   EN
                 </Button>
-                <Link to="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
+                {/* <Link to="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button className="bg-gradient-student hover:bg-student-hover text-white">
                     Login
                   </Button>
-                </Link>
+                </Link> */}
+sdsdfsf
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
+
+                <SignedOut>
+                  <SignInButton mode="modal" />
+                </SignedOut>
               </div>
             </nav>
           </motion.div>

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import { UserButton } from "@clerk/clerk-react";
 
 const quickStats = [
   {
@@ -144,6 +145,9 @@ export default function Dashboard() {
           <p className="text-muted-foreground">Here's what's happening with your students today</p>
         </div>
         <div className="flex gap-2">
+
+
+        <UserButton showName />
           <Button variant="outline" onClick={() => navigate('/counseling-request')} className="btn-white-hover">
             <Calendar className="h-4 w-4 mr-2" />
             Schedule Session

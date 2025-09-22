@@ -24,6 +24,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Header from "@/components/Header";
+import { SignIn } from "@clerk/clerk-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -162,7 +163,7 @@ const Login = () => {
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="email">Email Address</Label>
                       <Input
@@ -236,7 +237,9 @@ const Login = () => {
                       Sign In
                       <LogIn className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
-                  </form>
+                  </form> */}
+
+                  <SignIn signUpUrl={null} fallbackRedirectUrl="/"/>
                 </CardContent>
               </Card>
             </div>
