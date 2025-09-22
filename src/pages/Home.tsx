@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Users, 
-  UserCheck, 
-  Shield, 
-  Upload, 
-  UserCog, 
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Users,
+  UserCheck,
+  Shield,
+  Upload,
+  UserCog,
   MessageSquare,
   ArrowRight,
   CheckCircle,
@@ -22,92 +22,131 @@ import {
   Sparkles,
   Zap,
   Target,
-  TrendingUp
-} from 'lucide-react';
-import Header from '@/components/Header';
-import GeometricShapes from '@/components/GeometricShapes';
-import ScrollReveal from '@/components/ScrollReveal';
-import AnimatedCounter from '@/components/AnimatedCounter';
-import ParallaxImage from '@/components/ParallaxImage';
-import heroDashboard from '@/assets/hero-dashboard-dark.jpg';
-import teamImage from '@/assets/team-modern-dark.jpg';
-import counselImage from '@/assets/counseling-dark.jpg';
-import studentImage from '@/assets/students-modern-dark.jpg';
-import classroomImage from '@/assets/classroom-dark.jpg';
-import techImage from '@/assets/tech-workspace-dark.jpg';
+  TrendingUp,
+} from "lucide-react";
+import Header from "@/components/Header";
+import GeometricShapes from "@/components/GeometricShapes";
+import ScrollReveal from "@/components/ScrollReveal";
+import AnimatedCounter from "@/components/AnimatedCounter";
+import ParallaxImage from "@/components/ParallaxImage";
+import heroDashboard from "@/assets/hero-dashboard-dark.jpg";
+import teamImage from "@/assets/team-modern-dark.jpg";
+import counselImage from "@/assets/counseling-dark.jpg";
+import studentImage from "@/assets/students-modern-dark.jpg";
+import classroomImage from "@/assets/classroom-dark.jpg";
+import techImage from "@/assets/tech-workspace-dark.jpg";
+import { SignedIn, SignIn } from "@clerk/clerk-react";
 
 const Home = () => {
   const portalCards = [
     {
-      title: 'Student Portal',
-      description: 'Track your academic journey with intelligent insights and personalized support.',
+      title: "Student Portal",
+      description:
+        "Track your academic journey with intelligent insights and personalized support.",
       icon: Users,
-      gradient: 'student',
-      role: 'student',
-      features: ['Real-time Analytics', 'Smart Notifications', 'Progress Tracking'],
-      stats: '15K+ Active Students',
+      gradient: "student",
+      role: "student",
+      features: [
+        "Real-time Analytics",
+        "Smart Notifications",
+        "Progress Tracking",
+      ],
+      stats: "15K+ Active Students",
     },
     {
-      title: 'Counselor Portal',
-      description: 'Empower early intervention with AI-driven student risk detection and support tools.',
+      title: "Counselor Portal",
+      description:
+        "Empower early intervention with AI-driven student risk detection and support tools.",
       icon: UserCheck,
-      gradient: 'counselor',
-      role: 'counselor',
-      features: ['Risk Detection', 'Intervention Tools', 'Student Insights'],
-      stats: '2K+ Counselors',
+      gradient: "counselor",
+      role: "counselor",
+      features: ["Risk Detection", "Intervention Tools", "Student Insights"],
+      stats: "2K+ Counselors",
     },
     {
-      title: 'Admin Portal',
-      description: 'Comprehensive oversight with advanced analytics and system-wide management.',
+      title: "Admin Portal",
+      description:
+        "Comprehensive oversight with advanced analytics and system-wide management.",
       icon: Shield,
-      gradient: 'admin',
-      role: 'admin',
-      features: ['System Analytics', 'User Management', 'Custom Reports'],
-      stats: '500+ Institutions',
+      gradient: "admin",
+      role: "admin",
+      features: ["System Analytics", "User Management", "Custom Reports"],
+      stats: "500+ Institutions",
     },
   ];
 
   const howItWorksSteps = [
     {
       icon: Upload,
-      title: 'Smart Data Integration',
-      description: 'Seamlessly connect with existing systems and import attendance data with intelligent mapping and validation.',
+      title: "Smart Data Integration",
+      description:
+        "Seamlessly connect with existing systems and import attendance data with intelligent mapping and validation.",
     },
     {
       icon: UserCog,
-      title: 'AI-Powered Analysis',
-      description: 'Advanced algorithms analyze patterns, predict risks, and automatically assign support resources.',
+      title: "AI-Powered Analysis",
+      description:
+        "Advanced algorithms analyze patterns, predict risks, and automatically assign support resources.",
     },
     {
       icon: MessageSquare,
-      title: 'Proactive Intervention',
-      description: 'Enable targeted support with real-time alerts, automated workflows, and outcome tracking.',
+      title: "Proactive Intervention",
+      description:
+        "Enable targeted support with real-time alerts, automated workflows, and outcome tracking.",
     },
   ];
 
   const galleryImages = [
-    { src: classroomImage, alt: 'Modern classroom with sophisticated technology', title: 'Smart Classrooms' },
-    { src: techImage, alt: 'Advanced educational technology workspace', title: 'Tech Integration' },
-    { src: studentImage, alt: 'Students engaged in modern learning environment', title: 'Student Success' },
-    { src: counselImage, alt: 'Professional counseling in modern setting', title: 'Support Systems' },
-    { src: teamImage, alt: 'Professional team collaboration', title: 'Expert Team' },
-    { src: heroDashboard, alt: 'Advanced dashboard interface', title: 'Analytics Platform' },
+    {
+      src: classroomImage,
+      alt: "Modern classroom with sophisticated technology",
+      title: "Smart Classrooms",
+    },
+    {
+      src: techImage,
+      alt: "Advanced educational technology workspace",
+      title: "Tech Integration",
+    },
+    {
+      src: studentImage,
+      alt: "Students engaged in modern learning environment",
+      title: "Student Success",
+    },
+    {
+      src: counselImage,
+      alt: "Professional counseling in modern setting",
+      title: "Support Systems",
+    },
+    {
+      src: teamImage,
+      alt: "Professional team collaboration",
+      title: "Expert Team",
+    },
+    {
+      src: heroDashboard,
+      alt: "Advanced dashboard interface",
+      title: "Analytics Platform",
+    },
   ];
 
   const features = [
-    { icon: Zap, text: 'Real-time attendance tracking' },
-    { icon: Target, text: 'AI-powered risk detection' },
-    { icon: Users, text: 'Automated counselor assignment' },
-    { icon: BarChart3, text: 'Advanced analytics dashboard' },
-    { icon: Sparkles, text: 'Predictive intervention alerts' },
-    { icon: TrendingUp, text: 'Outcome measurement tools' },
+    { icon: Zap, text: "Real-time attendance tracking" },
+    { icon: Target, text: "AI-powered risk detection" },
+    { icon: Users, text: "Automated counselor assignment" },
+    { icon: BarChart3, text: "Advanced analytics dashboard" },
+    { icon: Sparkles, text: "Predictive intervention alerts" },
+    { icon: TrendingUp, text: "Outcome measurement tools" },
   ];
 
   const stats = [
-    { number: '500+', label: 'Educational Institutions', color: 'text-student' },
-    { number: '50K+', label: 'Students Supported', color: 'text-counselor' },
-    { number: '95%', label: 'Success Rate', color: 'text-admin' },
-    { number: '24/7', label: 'Platform Availability', color: 'text-primary' },
+    {
+      number: "500+",
+      label: "Educational Institutions",
+      color: "text-student",
+    },
+    { number: "50K+", label: "Students Supported", color: "text-counselor" },
+    { number: "95%", label: "Success Rate", color: "text-admin" },
+    { number: "24/7", label: "Platform Availability", color: "text-primary" },
   ];
 
   return (
@@ -137,8 +176,10 @@ const Home = () => {
                     Trusted by 500+ Educational Institutions
                   </Badge>
                   <h1 className="font-display text-5xl lg:text-7xl xl:text-8xl leading-tight text-foreground text-shadow">
-                    Transform{' '}
-                    <span className="shimmer-text neon-glow">Student Success</span>{' '}
+                    Transform{" "}
+                    <span className="shimmer-text neon-glow">
+                      Student Success
+                    </span>{" "}
                     Through Intelligent Insights
                   </h1>
                 </motion.div>
@@ -149,8 +190,9 @@ const Home = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  Empower educators with AI-driven attendance analytics, predictive intervention tools, 
-                  and comprehensive student support platforms that make a real difference.
+                  Empower educators with AI-driven attendance analytics,
+                  predictive intervention tools, and comprehensive student
+                  support platforms that make a real difference.
                 </motion.p>
 
                 <motion.div
@@ -185,9 +227,14 @@ const Home = () => {
                   transition={{ duration: 0.8, delay: 0.8 }}
                 >
                   {features.slice(0, 3).map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3 glass p-3 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center gap-3 glass p-3 rounded-lg"
+                    >
                       <feature.icon className="h-5 w-5 text-primary" />
-                      <span className="text-sm text-foreground font-medium">{feature.text}</span>
+                      <span className="text-sm text-foreground font-medium">
+                        {feature.text}
+                      </span>
                     </div>
                   ))}
                 </motion.div>
@@ -209,12 +256,16 @@ const Home = () => {
                     parallaxStrength={0.15}
                   />
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-                  
+
                   {/* Floating stats cards */}
                   <motion.div
                     className="absolute -top-6 -left-6 glass p-4 rounded-xl border border-primary/20"
                     animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                   >
                     <div className="flex items-center gap-2">
                       <TrendingUp className="h-5 w-5 text-counselor" />
@@ -222,7 +273,9 @@ const Home = () => {
                         <div className="text-sm font-semibold text-foreground">
                           <AnimatedCounter end={95} suffix="%" />
                         </div>
-                        <div className="text-xs text-muted-foreground">Intervention Rate</div>
+                        <div className="text-xs text-muted-foreground">
+                          Intervention Rate
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -230,7 +283,12 @@ const Home = () => {
                   <motion.div
                     className="absolute -bottom-6 -right-8 glass p-4 rounded-xl border border-primary/20"
                     animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1.5,
+                    }}
                   >
                     <div className="flex items-center gap-2">
                       <Users className="h-5 w-5 text-admin" />
@@ -238,7 +296,9 @@ const Home = () => {
                         <div className="text-sm font-semibold text-foreground">
                           <AnimatedCounter end={50000} suffix="+" />
                         </div>
-                        <div className="text-xs text-muted-foreground">Actively Supported</div>
+                        <div className="text-xs text-muted-foreground">
+                          Actively Supported
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -253,28 +313,36 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <motion.div 
-                  className={`text-4xl lg:text-5xl font-display ${stat.color} mb-2`}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  {stat.number.includes('+') ? (
-                    <>
-                      <AnimatedCounter end={parseInt(stat.number.replace(/[^0-9]/g, ''))} />
-                      <span>+</span>
-                    </>
-                  ) : (
-                    <AnimatedCounter 
-                      end={stat.number.includes('%') ? parseInt(stat.number) : parseInt(stat.number)} 
-                      suffix={stat.number.includes('%') ? '%' : ''}
-                    />
-                  )}
-                </motion.div>
-                <div className="text-muted-foreground font-medium">{stat.label}</div>
-              </div>
-            ))}
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center group">
+                  <motion.div
+                    className={`text-4xl lg:text-5xl font-display ${stat.color} mb-2`}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {stat.number.includes("+") ? (
+                      <>
+                        <AnimatedCounter
+                          end={parseInt(stat.number.replace(/[^0-9]/g, ""))}
+                        />
+                        <span>+</span>
+                      </>
+                    ) : (
+                      <AnimatedCounter
+                        end={
+                          stat.number.includes("%")
+                            ? parseInt(stat.number)
+                            : parseInt(stat.number)
+                        }
+                        suffix={stat.number.includes("%") ? "%" : ""}
+                      />
+                    )}
+                  </motion.div>
+                  <div className="text-muted-foreground font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </motion.div>
           </div>
         </section>
@@ -297,88 +365,93 @@ const Home = () => {
                 Tailored Portals for Every Role
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Access specialized dashboards and tools designed specifically for your role in the educational ecosystem
+                Access specialized dashboards and tools designed specifically
+                for your role in the educational ecosystem
               </p>
             </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {portalCards.map((card, index) => (
-                <ScrollReveal
-                  key={card.role}
-                  direction="up"
-                  delay={index * 0.2}
-                  className="group floating-card"
-                >
-                  <motion.div
-                    whileHover={{
-                      scale: 1.05,
-                      rotateX: 5,
-                      rotateY: 3
-                    }}
-                    whileTap={{
-                      scale: 0.95,
-                      transition: { duration: 0.1 }
-                    }}
-                    className="h-full"
+            <SignedIn>
+              <div className="grid md:grid-cols-3 gap-8">
+                {portalCards.map((card, index) => (
+                  <ScrollReveal
+                    key={card.role}
+                    direction="up"
+                    delay={index * 0.2}
+                    className="group floating-card"
                   >
-                    <Card className={`portal-card ${card.gradient} border-0 shadow-floating h-full relative overflow-hidden press-down`}>
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-                      <CardContent className="p-8 relative z-10 space-y-6">
-                        <div className="flex items-center justify-between">
-                          <motion.div 
-                            className="w-16 h-16 rounded-2xl glass border border-white/20 flex items-center justify-center"
-                            whileHover={{ 
-                              scale: 1.15, 
-                              rotateY: 180,
-                              transition: { duration: 0.6 }
-                            }}
-                          >
-                            <card.icon className="h-8 w-8 text-white" />
-                          </motion.div>
-                          <Badge className="bg-white/20 text-white border-0 text-xs">
-                            {card.stats}
-                          </Badge>
-                        </div>
-                        
-                        <div>
-                          <h3 className="font-display text-2xl text-white mb-3">
-                            {card.title}
-                          </h3>
-                          <p className="text-white/90 leading-relaxed text-lg">
-                            {card.description}
-                          </p>
-                        </div>
-
-                        <div className="space-y-3">
-                          {card.features.map((feature, featureIndex) => (
-                            <motion.div 
-                              key={featureIndex} 
-                              className="flex items-center gap-3 text-white/80"
-                              initial={{ opacity: 0, x: -20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ delay: featureIndex * 0.1 }}
-                              viewport={{ once: true }}
+                    <motion.div
+                      whileHover={{
+                        scale: 1.05,
+                        rotateX: 5,
+                        rotateY: 3,
+                      }}
+                      whileTap={{
+                        scale: 0.95,
+                        transition: { duration: 0.1 },
+                      }}
+                      className="h-full"
+                    >
+                      <Card
+                        className={`portal-card ${card.gradient} border-0 shadow-floating h-full relative overflow-hidden press-down`}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                        <CardContent className="p-8 relative z-10 space-y-6">
+                          <div className="flex items-center justify-between">
+                            <motion.div
+                              className="w-16 h-16 rounded-2xl glass border border-white/20 flex items-center justify-center"
+                              whileHover={{
+                                scale: 1.15,
+                                rotateY: 180,
+                                transition: { duration: 0.6 },
+                              }}
                             >
-                              <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                              <span>{feature}</span>
+                              <card.icon className="h-8 w-8 text-white" />
                             </motion.div>
-                          ))}
-                        </div>
+                            <Badge className="bg-white/20 text-white border-0 text-xs">
+                              {card.stats}
+                            </Badge>
+                          </div>
 
-                        <Link to={`/auth/login?role=${card.role}`} className="block">
-                          <Button 
-                            className="w-full glass border border-white/20 hover:bg-white/20 text-white hover:scale-105 transition-all duration-300 group mt-6 ripple-effect"
+                          <div>
+                            <h3 className="font-display text-2xl text-white mb-3">
+                              {card.title}
+                            </h3>
+                            <p className="text-white/90 leading-relaxed text-lg">
+                              {card.description}
+                            </p>
+                          </div>
+
+                          <div className="space-y-3">
+                            {card.features.map((feature, featureIndex) => (
+                              <motion.div
+                                key={featureIndex}
+                                className="flex items-center gap-3 text-white/80"
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: featureIndex * 0.1 }}
+                                viewport={{ once: true }}
+                              >
+                                <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                                <span>{feature}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+
+                          <Link
+                            to={`/auth/login?role=${card.role}`}
+                            className="block"
                           >
-                            Access Portal
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                          </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </ScrollReveal>
-              ))}
-            </div>
+                            <Button className="w-full glass border border-white/20 hover:bg-white/20 text-white hover:scale-105 transition-all duration-300 group mt-6 ripple-effect">
+                              Access Portal
+                              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                          </Link>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </SignedIn>
           </div>
         </section>
 
@@ -401,7 +474,8 @@ const Home = () => {
                 Three Steps to Transformation
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Our intelligent platform streamlines the entire process from data integration to actionable insights
+                Our intelligent platform streamlines the entire process from
+                data integration to actionable insights
               </p>
             </motion.div>
 
@@ -453,12 +527,13 @@ const Home = () => {
                     Our Impact
                   </Badge>
                   <h2 className="font-display text-4xl lg:text-6xl text-foreground mb-6 text-shadow">
-                    Transforming Education Through{' '}
+                    Transforming Education Through{" "}
                     <span className="gradient-text">Advanced Technology</span>
                   </h2>
                   <p className="text-xl text-muted-foreground leading-relaxed">
-                    Our platform combines cutting-edge AI with educational expertise to create 
-                    meaningful change in institutions worldwide.
+                    Our platform combines cutting-edge AI with educational
+                    expertise to create meaningful change in institutions
+                    worldwide.
                   </p>
                 </div>
 
@@ -468,17 +543,27 @@ const Home = () => {
                       key={index}
                       className="glass p-6 rounded-2xl border border-primary/10 hover-glow"
                       whileHover={{ scale: 1.05 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
                     >
-                      <div className={`text-3xl font-display ${stat.color} mb-2`}>{stat.number}</div>
-                      <div className="text-muted-foreground text-sm">{stat.label}</div>
+                      <div
+                        className={`text-3xl font-display ${stat.color} mb-2`}
+                      >
+                        {stat.number}
+                      </div>
+                      <div className="text-muted-foreground text-sm">
+                        {stat.label}
+                      </div>
                     </motion.div>
                   ))}
                 </div>
 
                 <Link to="/about">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="glass border-primary/30 hover:border-primary/50 text-foreground hover-glow group"
                   >
                     Learn More About Us
@@ -506,20 +591,22 @@ const Home = () => {
                       alt={image.alt}
                       className="w-full h-full object-cover"
                       loading="lazy"
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.1,
-                        transition: { duration: 0.6, ease: "easeOut" }
+                        transition: { duration: 0.6, ease: "easeOut" },
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <motion.div 
+                    <motion.div
                       className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
                       viewport={{ once: true }}
                     >
-                      <h4 className="text-white font-semibold text-sm">{image.title}</h4>
+                      <h4 className="text-white font-semibold text-sm">
+                        {image.title}
+                      </h4>
                     </motion.div>
                   </ScrollReveal>
                 ))}
@@ -546,10 +633,13 @@ const Home = () => {
                       <div className="p-3 rounded-2xl bg-gradient-student">
                         <Mail className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="font-display text-2xl text-foreground">Get In Touch</h3>
+                      <h3 className="font-display text-2xl text-foreground">
+                        Get In Touch
+                      </h3>
                     </div>
                     <p className="text-muted-foreground text-lg">
-                      Ready to transform your institution? Our team is here to help you get started with a personalized demo.
+                      Ready to transform your institution? Our team is here to
+                      help you get started with a personalized demo.
                     </p>
                     <div className="space-y-4">
                       <div className="flex items-center gap-3 text-muted-foreground">
@@ -587,10 +677,13 @@ const Home = () => {
                       <div className="p-3 rounded-2xl bg-gradient-counselor">
                         <Star className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="font-display text-2xl text-foreground">Share Feedback</h3>
+                      <h3 className="font-display text-2xl text-foreground">
+                        Share Feedback
+                      </h3>
                     </div>
                     <p className="text-muted-foreground text-lg">
-                      Help us improve by sharing your experience and suggestions for our platform.
+                      Help us improve by sharing your experience and suggestions
+                      for our platform.
                     </p>
                     <div className="flex items-center gap-2">
                       {[...Array(5)].map((_, i) => (
@@ -631,7 +724,8 @@ const Home = () => {
                   </span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Transforming student success through intelligent attendance analytics and proactive support systems.
+                  Transforming student success through intelligent attendance
+                  analytics and proactive support systems.
                 </p>
                 <div className="flex gap-4">
                   <div className="w-10 h-10 glass rounded-lg flex items-center justify-center hover-glow cursor-pointer">
@@ -648,12 +742,14 @@ const Home = () => {
 
               {/* Quick Links */}
               <div>
-                <h4 className="font-display text-lg text-foreground mb-6">Quick Links</h4>
+                <h4 className="font-display text-lg text-foreground mb-6">
+                  Quick Links
+                </h4>
                 <ul className="space-y-4">
-                  {['Home', 'About', 'Contact', 'Feedback'].map((link) => (
+                  {["Home", "About", "Contact", "Feedback"].map((link) => (
                     <li key={link}>
                       <Link
-                        to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
+                        to={link === "Home" ? "/" : `/${link.toLowerCase()}`}
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
                         {link}
@@ -665,24 +761,30 @@ const Home = () => {
 
               {/* Resources */}
               <div>
-                <h4 className="font-display text-lg text-foreground mb-6">Resources</h4>
+                <h4 className="font-display text-lg text-foreground mb-6">
+                  Resources
+                </h4>
                 <ul className="space-y-4">
-                  {['Documentation', 'API Reference', 'Support', 'Status'].map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
+                  {["Documentation", "API Reference", "Support", "Status"].map(
+                    (link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
 
               {/* Contact & Socials */}
               <div>
-                <h4 className="font-display text-lg text-foreground mb-6">Connect</h4>
+                <h4 className="font-display text-lg text-foreground mb-6">
+                  Connect
+                </h4>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 text-muted-foreground">
                     <Mail className="h-4 w-4 text-primary" />
