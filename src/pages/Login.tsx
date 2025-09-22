@@ -239,7 +239,7 @@ const Login = () => {
                     </Button>
                   </form> */}
 
-                  <SignIn signUpUrl={null} fallbackRedirectUrl="/"/>
+                  <SignIn signUpUrl={null} fallbackRedirectUrl="/check-role"/>
                 </CardContent>
               </Card>
             </div>

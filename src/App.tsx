@@ -59,6 +59,14 @@ const AnimatedRoutes = () => {
             </PageTransition>
           }
         />
+        <Route
+          path="/check-role"
+          element={
+            <PageTransition>
+              <RoleRedirect />
+            </PageTransition>
+          }
+        />
 
         <Route
           path="/unauthorized"
@@ -289,7 +297,6 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
-        <RoleRedirect />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

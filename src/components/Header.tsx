@@ -82,7 +82,7 @@ const Header = () => {
               <UserButton />
             </SignedIn>
             <SignedOut>
-              <SignInButton mode="modal">
+              <SignInButton mode="modal" fallbackRedirectUrl='/check-role'>
               <Button className="bg-gradient-student hover:bg-student-hover text-white shadow-soft hover:shadow-glow hover:scale-105 transition-all duration-300 ripple-effect press-down">
                 Login 
               </Button>
